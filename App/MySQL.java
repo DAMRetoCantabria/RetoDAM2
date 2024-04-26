@@ -10,10 +10,10 @@ import java.util.Properties;
  */
 public class MySQL {
     private Connection connection = null;
-    private static final String BD = "java_02_clinica";
-    private static final String USUARIO = "root";
-    private static final String CLAVE = "root";
-    private static final String URL = "jdbc:mysql://localhost:3306/" + BD;    
+    private static final String BD = "ACEX_IESMH";
+    private static final String USUARIO = "desarrollo";
+    private static final String CLAVE = "retacantabria24";
+    private static final String URL = "jdbc:mysql://10.0.16.34:3306/" + BD;    
     
     /**
      * Constructor privado para evitar la creación de instancias directamente.
