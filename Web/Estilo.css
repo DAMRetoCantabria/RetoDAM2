@@ -1,0 +1,11 @@
+*{
+    padding: 0%;
+    margin-top: auto;
+}
+
+.contenedor1{
+    width: 300px; /* Ancho inicial del contenedor */
+    background-color: #f0f0f0;
+    padding: 20px;
+    transition: width 0.3s; /* Agrega transición suave */
+  }
