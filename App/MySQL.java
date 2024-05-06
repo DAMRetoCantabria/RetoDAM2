@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Esta clase representa una conexión a una base de datos MySQL.
+ * Esta clase representa una conexión a una base de datos MySQL..
  */
 public class MySQL {
     private Connection connection = null;
