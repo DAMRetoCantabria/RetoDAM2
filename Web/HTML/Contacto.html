@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/CSS/contacto.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reta Cantabria</title>
+</head>
+<body>
+    <header>
+        <h1>Contacto</h1>
+    
+    <nav id="indice">
+        <a href="RetaCantabria.html"><b>INICIO</b></a>
+        <a href="Actividades.html"><b>ACTIVIDADES</b></a>
+        <a href="Registro.html"><b>REGISTRO</b></a>
+        <a href="Contacto.html"><b>CONTACTO</b></a>
+    </nav>
+</header>
+    <main>
+        <div id="cuerpo">
+            <!--formulario de contacto-->
+            <section id="contacto">
+                <form action="#" method="post"><!--# para que no envie los datos a ninguna parte-->
+                             
+                        <p><label for="Usuario"><b>Usuario</b></label><br><br>
+                        <input type="text" name="usuario" id="Usuario" required></p>
+ 
+                        <p><label for="Motivo de contacto" id="motivo de contacto"><b>Motivo de contacto</b></label><br><br>
+                        <select>
+                            <option value="sl">seleccione un motivo</option>
+                            <option value="pr">problemas</option>
+                            <option value="in">informacion</option>
+                            <option value="cl">colaboracion</option>
+                            <option value="ot">otro</option>
+                        </select></p>                            
+                       
+                        <p><label for="comentarios"><b>Comentarios</b></label><br><br>
+                            <input type="text" name="comentarios"></p><br>
+   
+                        <p>
+                           <input type="reset" name="borrar" id="reset">
+                        </p>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>RetaCantabria &copy; <a href="#top">Volver arriba</a></p>
+    </footer>
+</body>
+</html>
