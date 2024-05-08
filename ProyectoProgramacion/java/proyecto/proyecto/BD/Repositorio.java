@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface Repositorio <T>{
     public List<T> listar();
-    public T buscar(int id);
+    public T buscar(T t);
     public T buscar(String codigo);
     public void guardar(T t);
     public void borrar(T t);
