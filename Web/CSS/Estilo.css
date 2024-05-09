@@ -2,7 +2,168 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
   }
+
+  .cuerpo {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: aqua 5px solid;
+    border-radius: 30px;
+    background-color: aqua;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .botonesIndice:hover {
+    transform: translateY(-20px);
+    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+  }
+
+  main {
+    background-color: honeydew;
+  }
+
+  footer {
+    background-color: cornflowerblue;
+  }
+
+  .piePagina {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+    height: 200px;
+    font-size: 500%;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   body{
 
     font-family: 'open sans';
@@ -87,17 +248,7 @@
   .palabras {
     font-size: 50px;
   }
-  
-  main div article {
-    text-align: center;
-    padding: 10%;
-    border: #000000 5px solid;
-    background-color: white;
-  }
 
-  main div article p b {
-    font-size: 50px;
-  }
 
   /* Estilos del slider*/
   .slider{
@@ -105,27 +256,6 @@
     height: 600px;
     overflow: hidden;
   }
-
-  header{
-    background: -webkit-linear-gradient(#3a00ce,rgb(145, 0, 185));
-  }
-
-  main {
-    padding: 10%;
-    background-color: rgb(255, 163, 255);
-    border: #000000 5px solid;
-}
-
-footer {
-  padding: 5%;
-  background: -webkit-linear-gradient(#3a00ce,rgb(145, 0, 185));
-  text-align: right;
-  border: #000000 5px solid;
-}
-
-footer section {
-  font-size: 50px;
-}
 
   .slider ul{
     display: flex;
