@@ -2,11 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.Cuerpo {
-  
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .Cuerpo{
@@ -18,7 +14,7 @@
   align-content: center;
   width: 100vw;
   height: 50vh;
-  gap: 5%;
+  gap: 15%;
 }
 
 .actividades{
@@ -46,6 +42,8 @@
 
 .actividades img{
   width: 30%;
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+  transition: transform 0.3s ease-in-out;
 }
 
 
@@ -56,6 +54,11 @@
 
 main {
   background-color: honeydew;
+  height: 1500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
@@ -71,6 +74,106 @@ footer {
   text-align: right;
   height: 200px;
   font-size: 500%;
+}
+
+.actividad1 {
+  padding: 5%;
+  border: aqua 10px solid;
+  border-radius: 20px;
+  background-color: white;
+  width: 120%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.actividad1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.imagen1 {
+  width: 500px;
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.actividad2 {
+  padding: 5%;
+  border: aqua 10px solid;
+  border-radius: 20px;
+  background-color: white;
+  width: 110%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.actividad2:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.imagen2 {
+  width: 450px;
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.actividad3 {
+  padding: 3%;
+  border: aqua 10px solid;
+  border-radius: 20px;
+  background-color: white;
+  width: 70%;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.actividad3:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.titulo1 {
+  font-size: 50px;
+}
+
+.texto1 {
+  font-size: 30px;
+}
+.titulo2 {
+  font-size: 50px;
+}
+
+.texto2 {
+  font-size: 30px;
+}
+
+.titulo3 {
+  font-size: 50px;
+}
+
+.texto3 {
+  font-size: 30px
+}
+
+.responsable {
+  font-size: 25px;
+}
+
+.imagen3 {
+  box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.grantitulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: #000000 5px solid;
+  background-color: #ffffff;
+  font-size: 30px;
 }
 
 

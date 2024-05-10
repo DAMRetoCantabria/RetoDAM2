@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Contacto</h1>
+        <h1 class="grantitulo">Contacto</h1>
     
     <nav id="indice">
         <a class="botonesIndice" href="RetaCantabria.html"><b>INICIO</b></a>
@@ -24,25 +24,24 @@
             <section class="contacto">
                 <form action="#" method="post"><!--# para que no envie los datos a ninguna parte-->
                              
-                        <p><label for="Usuario"><b>Usuario</b></label><br><br>
-                        <input type="text" name="usuario" id="Usuario" required></p>
- 
-                        <p><label for="Motivo de contacto" id="motivo de contacto"><b>Motivo de contacto</b></label><br><br>
-                        <select>
-                            <option value="sl">seleccione un motivo</option>
-                            <option value="pr">problemas</option>
-                            <option value="in">informacion</option>
-                            <option value="cl">colaboracion</option>
-                            <option value="ot">otro</option>
-                        </select></p>                            
-                       
-                        <p><label for="comentarios"><b>Comentarios</b></label><br><br>
-                            <input type="text" name="comentarios"></p><br>
-   
+                        <p><label for="Usuario"><b class="texto">Usuario</b></label><br><br>
+                        <input class="escribir1" type="text" name="usuario" id="Usuario" required></p> <br>
+                            <br>
+                        <p><label for="Motivo de contacto" id="motivo de contacto"><b class="texto">Motivo de contacto</b></label><br><br>
+                        <select class="seleccion">
+                            <option class="opcion" value="sl">seleccione un motivo</option>
+                            <option class="opcion" value="pr">problemas</option>
+                            <option class="opcion" alue="in">informacion</option>
+                            <option class="opcion" value="cl">colaboracion</option>
+                            <option class="opcion" value="ot">otro</option>
+                        </select></p> <br>                            
+                            <br>
+                        <p><label for="comentarios"><b class="texto">Comentarios</b></label><br><br>
+                            <input class="comentarios" type="text" name="comentarios"></p><br>
+                            <br>
                         <p>
-                            <button type="submit">
-                            <img id=flecha src="9174013.png" alt="Enviar"></button>
-                           <input type="reset" name="borrar" id="reset">
+                            <button class="boton" type="submit">Enviar</button>
+                            <button class="boton" type="reset"><b>Borrar</b></button>
                         </p>
                 </form>
             </section>

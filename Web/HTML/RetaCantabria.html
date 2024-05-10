@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title>Reta Cantabria</title>
     <link rel="stylesheet" href="/CSS/Estilo.css" />
 </head>
+
 <body>
     <header id="cabecera">
         <!--cabecera-->
-        <h1 style="color: white;">ACEX</h1>
+        <div class="grantitulo">
+            <h1>ACEX</h1>
+        </div>
         <section class="textos-headerss">
             <nav class="indice">
-                <a class="botonesIndice" href="RetaCantabria.html"><b >INICIO</b></a>
+                <a class="botonesIndice" href="RetaCantabria.html"><b>INICIO</b></a>
                 <a class="botonesIndice" href="Actividades.html"><b>ACTIVIDADES</b></a>
                 <a class="botonesIndice" href="Registro.html"><b>REGISTRO</b></a>
                 <a class="botonesIndice" href="Contacto.html"><b>CONTACTO</b></a>
@@ -19,16 +23,13 @@
             <div class="slider">
                 <ul>
                     <li>
-                        <img src="/IMG/img.png" alt="">
+                        <a href="/HTML/senderismo.html"><img src="/IMG/SENDERISMO.png" alt=""></a>
                     </li>
                     <li>
-                        <img src="/IMG/img2.png" alt="">
+                        <a href="/HTML/museo.html"><img src="/IMG/CIENCIAS.png" alt=""></a>
                     </li>
                     <li>
-                        <img src="/IMG/img3.png" alt="">
-                    </li>
-                    <li>
-                        <img src="/IMG/img4.png.png" alt="">
+                        <a href="/HTML/escalada.html"><img src="/IMG/ESCALADA2.png" alt=""></a>
                     </li>
                 </ul>
             </div>
@@ -39,12 +40,21 @@
         <div class="cuerpo">
             <article>
                 <p>
-                    <b>¿Quiénes somos?</b> <br>
-                    <ol class="texto">
-                        Somos una gente guay! 😎
-                    </ol>
+                <h2><b class="texto">¿Quiénes somos?</b></h2> <br>
+                <ol class="texto2">
+                    <p>Somos una organización llamada ACEX que se encarga de hacer actividades para colegios, como
+                        acampamentos, escalada y muchas más actividades. </p> <br>
+                    <p>¡Vamos hacer lo posible para que sus alumnos disfruten de las actividades que ofrecemos!</p>
+                </ol>
                 </p>
             </article>
+        </div>
+        <div class="galeria">
+            <h2 class="texto">Galería</h2> <br> 
+            <p class="texto2">Mire las siguientes fotos de actividades las cuales hacemos: </p> <br>
+            <img class="imagen" src="/IMG/imagen1.png"> <br>
+            <img class="imagen" src="/IMG/imagen2.png"> <br>
+            <img class="imagen" src="/IMG/imagen3.png"> <br>
         </div>
     </main>
 
@@ -53,8 +63,9 @@
             <h5>RetaCantabria &copy;</h5>
         </section>
     </footer>
-    <button class="chat-button"><a  href="Registro.html">Registrate</a></button>
+    <button class="chat-button"><a href="Registro.html">Registrate</a></button>
 
     <script src="/HTML/OTROS/movimiento.js"></script>
 </body>
+
 </html>

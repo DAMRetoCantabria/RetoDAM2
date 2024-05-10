@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .cuerpo {
@@ -22,10 +22,10 @@
   align-items: center;
   align-content: center;
   text-align: center;
-  border: aqua 5px solid;
+  border: aqua 10px solid;
   border-radius: 20px;
-  width: 50%;
-  background-color: aqua;
+  width: 20%;
+  background-color: white;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out;
 }
@@ -43,6 +43,10 @@
 main {
   padding: 5%;
   background-color: honeydew;
+  height: 1500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 footer {
@@ -58,6 +62,73 @@ footer {
   text-align: right;
   height: 200px;
   font-size: 500%;
+}
+
+.texto {
+  font-size: 40px;
+}
+
+.escribir1 {
+  height: 50px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.escribir1:hover {
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.seleccion {
+  height: 50px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.seleccion:hover {
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.opcion {
+  height: 50px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.comentarios {
+  height: 100px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.comentarios:hover {
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.boton {
+  width: 100px;
+  height: 50px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  font-size: 30px;
+}
+
+.boton:hover {
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
+.grantitulo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: #000000 5px solid;
+  background-color: #ffffff;
+  font-size: 30px;
 }
 
 
