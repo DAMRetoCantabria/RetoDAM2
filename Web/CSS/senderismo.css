@@ -53,12 +53,14 @@
   }
   
   main {
+    padding: 10%;
     background-color: honeydew;
-    height: 1500px;
+    height: 2100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5%;
   }
   
   footer {
@@ -175,8 +177,105 @@
     background-color: #ffffff;
     font-size: 30px;
   }
+
+  .bloque {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    border: aqua 10px solid;
+    border-radius: 20px;
+    background-color: white;
+    width: 70%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    width: 30%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    text-align: center;
+  }
+
+  .bloque:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+  }
+
+  .descripcion {
+    font-size: 50px;
+  }
+
+  .desc1 {
+    font-size: 30px;
+  }
+
+  .desc2 {
+    font-size: 40px;
+  }
+
+  .desc3 {
+    font-size: 40px;
+  }
+
+  .desc4 {
+    font-size: 40px;
+  }
+
+  .desc5 {
+    font-size: 40px;
+  }
+
+  .desc6 {
+    font-size: 40px;
+  }
+
+  .text {
+    font-size: 30px;
+  }
+
+  .gale {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    border: aqua 10px solid;
+    border-radius: 20px;
+    background-color: white;
+    width: 70%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    width: 30%;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .gale:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+  }
   
-  
+  .img1 {
+    width: 80%;
+    box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .img2 {
+    width: 80%;
+    box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .img3 {
+    width: 80%;
+    box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .gal {
+    font-size: 50px;
+  }
   
   
   

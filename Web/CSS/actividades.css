@@ -97,6 +97,11 @@ footer {
   transition: transform 0.3s ease-in-out;
 }
 
+.imagen1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
 .actividad2 {
   padding: 5%;
   border: aqua 10px solid;
@@ -116,6 +121,11 @@ footer {
   width: 450px;
   box-shadow: 0 8px 40px 0 rgba(0, 0, 0, 1);
   transition: transform 0.3s ease-in-out;
+}
+
+.imagen2:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
 }
 
 .actividad3 {
@@ -165,6 +175,11 @@ footer {
   transition: transform 0.3s ease-in-out;
 }
 
+.imagen3:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 1);
+}
+
 .grantitulo {
   display: flex;
   flex-direction: column;
@@ -174,6 +189,10 @@ footer {
   border: #000000 5px solid;
   background-color: #ffffff;
   font-size: 30px;
+}
+
+.mas {
+  font-size: 50px;
 }
 
 
