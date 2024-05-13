@@ -4,7 +4,21 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
+/**
+ * Clase de utilidades que contiene métodos para comprobar la fuerza de una
+ * contraseña,
+ * limitar el número de caracteres en un documento, validar un login, validar
+ * una contraseña
+ * y validar un DNI.
+ */
 public class Utils {
+
+    /**
+     * Comprueba la fuerza de una contraseña basándose en ciertos criterios.
+     * 
+     * @param password la contraseña a comprobar
+     * @return la fuerza de la contraseña (1, 2 o 3)
+     */
     public static int comprobarFuerzaPassword(String password) {
         int fuerza = 0;
         if (password.length() >= 8) {
@@ -32,6 +46,12 @@ public class Utils {
         return fuerza;
     }
 
+    /**
+     * Limita el número de caracteres en un documento.
+     * 
+     * @param numCaracteres el número máximo de caracteres permitidos
+     * @return el filtro de documento que limita el número de caracteres
+     */
     public static DocumentFilter limitaCaracteres(int numCaracteres) {
         DocumentFilter filter = new DocumentFilter() {
             @Override
@@ -47,16 +67,34 @@ public class Utils {
         return filter;
     }
 
+    /**
+     * Valida un login utilizando una expresión regular.
+     * 
+     * @param login el login a validar
+     * @return true si el login es válido, false de lo contrario
+     */
     public static boolean isValidLogin(String login) {
         String regex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         return login.matches(regex);
     }
 
+    /**
+     * Valida una contraseña utilizando una expresión regular.
+     * 
+     * @param password la contraseña a validar
+     * @return true si la contraseña es válida, false de lo contrario
+     */
     public static boolean isValidPassword(String password) {
         String regex = "^[A-Za-z\\d@$!%*#?&]{8,}$";
         return password.matches(regex);
     }
 
+    /**
+     * Valida un DNI verificando su longitud y la letra correspondiente.
+     * 
+     * @param dni el DNI a validar
+     * @return true si el DNI es válido, false de lo contrario
+     */
     public static boolean validarDNI(String dni) {
         boolean valido = false;
         String letras = "TRWAGMYFPDXBNJZSQVHLCKE";

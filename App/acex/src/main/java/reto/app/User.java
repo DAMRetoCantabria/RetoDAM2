@@ -16,6 +16,7 @@ public class User {
      * @param apellidos Los apellidos del usuario.
      * @param nivel     El nivel del usuario.
      * @param foto      La foto del usuario.
+     * @param id        El id del usuario.
      */
     public User(String nombre, String apellidos, String nivel, String foto, int id) {
         this.nombre = nombre.concat(" ").concat(apellidos);

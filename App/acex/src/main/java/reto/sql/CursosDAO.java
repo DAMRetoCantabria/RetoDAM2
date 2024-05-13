@@ -158,6 +158,17 @@ public class CursosDAO implements Repositorio<Curso> {
         return correcto;
     }
 
+    /**
+     * Este método se utiliza para obtener el número total de alumnos en un curso
+     * específico.
+     * Ejecuta una consulta SQL que suma el número de alumnos en todos los grupos
+     * que pertenecen al curso dado.
+     *
+     * @param curso El id del curso para el que se quiere obtener el número de
+     *              alumnos.
+     * @return El número total de alumnos en el curso. Si ocurre una excepción SQL,
+     *         se devuelve 0 y se imprime el mensaje de la excepción.
+     */
     public int getNumAlumnos(int curso) {
         int numAlumnos = 0;
         try (PreparedStatement statement = getConnection()

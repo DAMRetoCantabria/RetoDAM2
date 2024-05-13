@@ -6,5 +6,20 @@ package reto.objects;
  * Equipodirectivo.
  */
 public enum Nivel {
-    Superusuario, Administrador, Profesor, Equipodirectivo
+    /**
+     * Representa nivel de usuario superusuario.
+     */
+    Superusuario,
+    /**
+     * Representa nivel de usuario administrador.
+     */
+    Administrador,
+    /**
+     * Representa nivel de usuario profesor.
+     */
+    Profesor,
+    /**
+     * Representa nivel de usuario equipo directivo.
+     */
+    Equipodirectivo
 }

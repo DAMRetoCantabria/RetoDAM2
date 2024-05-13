@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.NumberFormatter;
 import javax.swing.text.PlainDocument;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
@@ -31,8 +29,11 @@ import reto.sql.TransporteDAO;
 import reto.utilidades.*;
 import reto.components.VentanaSingleton;
 
+/**
+ * Clase Solicitudes que extiende de JPanel.
+ * Esta clase se encarga de gestionar las solicitudes.
+ */
 public class Solicitudes extends JPanel {
-
     private JLabel departamento;
     private JComboBox<String> departamento_desp;
     private JLabel titulo;
@@ -79,23 +80,43 @@ public class Solicitudes extends JPanel {
     private JFormattedTextField precio;
     private JTextField emp_transporte;
 
+    /**
+     * Constructor de la clase Solicitudes.
+     * 
+     * @param estado    Estado de la solicitud.
+     * @param solicitud Objeto de la clase Solicitud.
+     */
     public Solicitudes(int estado, Solicitud solicitud) {
         this.estado = estado;
         this.solicitud = solicitud;
         init();
     }
 
+    /**
+     * Constructor de la clase Solicitudes.
+     * 
+     * @param estado     Estado de la solicitud.
+     * @param programada Objeto de la clase Programadas.
+     */
     public Solicitudes(int estado, Programadas programada) {
         this.estado = estado;
         this.programada = programada;
         init();
     }
 
+    /**
+     * Constructor de la clase Solicitudes.
+     * 
+     * @param estado Estado de la solicitud.
+     */
     public Solicitudes(int estado) {
         this.estado = estado;
         init();
     }
 
+    /**
+     * Método para inicializar la interfaz de usuario y los componentes.
+     */
     private void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
 
@@ -140,6 +161,11 @@ public class Solicitudes extends JPanel {
         add(panel);
     }
 
+    /**
+     * Método para introducir el departamento en la interfaz de usuario.
+     * 
+     * @return Componente con la información del departamento.
+     */
     private Component introDepartamento() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -172,6 +198,11 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Método para introducir el título en la interfaz de usuario.
+     * 
+     * @return Componente con la información del título.
+     */
     private Component introTitulo() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -188,6 +219,12 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Método para introducir si la actividad está prevista en el currículo.
+     * 
+     * @return Componente con la información de si la actividad está prevista en el
+     *         currículo.
+     */
     private Component IntroPrevista() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -224,6 +261,15 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel para introducir información sobre el transporte.
+     * Crea un panel con un JComboBox para seleccionar los medios de transporte
+     * disponibles.
+     * También incluye un JTextArea para introducir observaciones sobre el
+     * transporte.
+     * 
+     * @return Componente JPanel con los elementos de transporte.
+     */
     private Component introTransporte() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -274,6 +320,13 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel para introducir las horas de inicio y fin de la
+     * actividad.
+     * Crea un panel con dos TimePickers para seleccionar las horas de inicio y fin.
+     * 
+     * @return Componente JPanel con los elementos de horario.
+     */
     private Component introHoras() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -305,6 +358,14 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel para introducir las fechas de inicio y fin de la
+     * actividad.
+     * Crea un panel con dos DatePickers para seleccionar las fechas de inicio y
+     * fin.
+     * 
+     * @return Componente JPanel con los elementos de fecha.
+     */
     private Component introFechas() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -336,6 +397,13 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel para seleccionar los grupos o cursos que
+     * participarán en la actividad.
+     * Crea un panel con un JComboBox para seleccionar los grupos o cursos.
+     * 
+     * @return Componente JPanel con los elementos de alumnos.
+     */
     private Component introAlumnos() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -429,6 +497,16 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel para indicar si se requiere alojamiento y para
+     * introducir observaciones sobre el alojamiento.
+     * Crea un panel con dos JRadioButtons para seleccionar si se requiere
+     * alojamiento o no.
+     * También incluye un JTextArea para introducir observaciones sobre el
+     * alojamiento.
+     * 
+     * @return Componente JPanel con los elementos de alojamiento.
+     */
     private Component introAlojamiento() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -466,6 +544,16 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel con una lista desplegable de profesores
+     * responsables.
+     * Si el estado es 2, se seleccionan los responsables de una solicitud
+     * específica.
+     * Si el estado es 3, se seleccionan los responsables de una programación
+     * específica.
+     * 
+     * @return Componente con la lista desplegable de profesores responsables.
+     */
     private Component introResponsables() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -505,6 +593,16 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel con una lista desplegable de profesores
+     * participantes.
+     * Si el estado es 2, se seleccionan los participantes de una solicitud
+     * específica.
+     * Si el estado es 3, se seleccionan los participantes de una programación
+     * específica.
+     * 
+     * @return Componente con la lista desplegable de profesores participantes.
+     */
     private Component introParticipantes() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -544,6 +642,15 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel con un área de texto para las observaciones.
+     * Si el estado es 2, se establece el texto de las observaciones de una
+     * solicitud específica.
+     * Si el estado es 3, se establece el texto de las observaciones de una
+     * programación específica.
+     * 
+     * @return Componente con el área de texto para las observaciones.
+     */
     private Component introObservaciones() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -564,6 +671,14 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel con campos para la empresa de transporte y el
+     * precio.
+     * Si el estado es 3, se establecen los valores de la empresa de transporte y el
+     * precio de una programación específica.
+     * 
+     * @return Componente con los campos para la empresa de transporte y el precio.
+     */
     private Component introProgramadas() {
         JPanel panel = new JPanel(new MigLayout("wrap, fillx, insets 5 5 0 5", "[fill]"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -595,6 +710,11 @@ public class Solicitudes extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método se llama cuando se hace clic en el botón Aceptar.
+     * Si el estado es 2, se crea una solicitud.
+     * Si el estado es 3, se crea una programación.
+     */
     private void onAceptarClicked() {
         if (validaSolicitud()) {
             if (estado == 2) {
@@ -606,6 +726,13 @@ public class Solicitudes extends JPanel {
         }
     }
 
+    /**
+     * Este método valida los campos de la solicitud.
+     * Comprueba varios campos y muestra un mensaje de error si alguno de ellos no
+     * es válido.
+     * 
+     * @return Verdadero si todos los campos son válidos, falso en caso contrario.
+     */
     private boolean validaSolicitud() {
         if (departamento_desp.getSelectedIndex() < 0) {
             JOptionPane.showMessageDialog(null, "Debes seleccionar un departamento.");
@@ -667,6 +794,16 @@ public class Solicitudes extends JPanel {
         }
     }
 
+    /**
+     * Este método crea una nueva solicitud.
+     * Primero, recoge los datos de los campos de entrada y los guarda en variables.
+     * Luego, crea listas de profesores participantes, responsables, medios de
+     * transporte, cursos y grupos.
+     * Después, dependiendo del estado de la solicitud, crea una nueva solicitud o
+     * actualiza una existente.
+     * Finalmente, si se han realizado cambios, guarda los nuevos datos en la base
+     * de datos y cierra la ventana.
+     */
     private void creaSolicitud() {
         SolicitudDAO solicitudSQL = new SolicitudDAO();
         boolean cambio = true;
@@ -772,6 +909,16 @@ public class Solicitudes extends JPanel {
         }
     }
 
+    /**
+     * Este método crea una nueva actividad programada.
+     * Primero, recoge los datos de los campos de entrada y los guarda en variables.
+     * Luego, crea listas de profesores participantes, responsables, medios de
+     * transporte, cursos y grupos.
+     * Después, dependiendo del estado de la actividad, crea una nueva actividad
+     * programada o actualiza una existente.
+     * Finalmente, si se han realizado cambios, guarda los nuevos datos en la base
+     * de datos y cierra la ventana.
+     */
     private void creaProgramada() {
         ProgramadasDAO programadaSQL = new ProgramadasDAO();
         boolean cambio = true;
@@ -873,11 +1020,31 @@ public class Solicitudes extends JPanel {
         }
     }
 
+    /**
+     * Este método establece un filtro de documento en un campo de texto JTextField.
+     * El filtro limita el número de caracteres que se pueden introducir en el
+     * campo.
+     * 
+     * @param campo      El campo de texto JTextField en el que se va a establecer
+     *                   el filtro.
+     * @param caracteres El número máximo de caracteres que se pueden introducir en
+     *                   el campo.
+     */
     private void setDocumentfilter(JTextField campo, int caracteres) {
         DocumentFilter filter = Utils.limitaCaracteres(caracteres);
         ((PlainDocument) campo.getDocument()).setDocumentFilter(filter);
     }
 
+    /**
+     * Este método establece un filtro de documento en un campo de texto JTextArea.
+     * El filtro limita el número de caracteres que se pueden introducir en el
+     * campo.
+     * 
+     * @param campo      El campo de texto JTextArea en el que se va a establecer el
+     *                   filtro.
+     * @param caracteres El número máximo de caracteres que se pueden introducir en
+     *                   el campo.
+     */
     private void setDocumentfilter(JTextArea campo, int caracteres) {
         DocumentFilter filter = Utils.limitaCaracteres(caracteres);
         ((PlainDocument) campo.getDocument()).setDocumentFilter(filter);

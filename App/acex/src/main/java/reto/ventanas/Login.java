@@ -20,22 +20,41 @@ import reto.sql.DepartamentoDAO;
 import reto.sql.MySQL;
 import reto.utilidades.Utils;
 
+/**
+ * Esta clase representa la ventana de inicio de sesión de la aplicación.
+ * Permite al usuario ingresar su correo electrónico y contraseña para iniciar
+ * sesión.
+ * Si las credenciales son válidas, se establece el estado de inicio de sesión
+ * en el formulario principal.
+ * Si las credenciales no son válidas, se muestra un mensaje de error.
+ */
 public class Login extends JPanel {
-
     private MainForm mainForm;
     private JTextField usuario;
     private JPasswordField password;
     private JCheckBox recordar;
     private JButton login;
     private JLabel errorLabel;
+
+    /**
+     * Representa el usuario actualmente logueado en el sistema.
+     */
     public static User user;
     private DepartamentoDAO departamentoSQL = new DepartamentoDAO();
 
+    /**
+     * Crea una nueva instancia de la clase Login.
+     * 
+     * @param mainForm El formulario principal de la aplicación.
+     */
     public Login(MainForm mainForm) {
         this.mainForm = mainForm;
         init();
     }
 
+    /**
+     * Inicializa los componentes de la ventana de inicio de sesión.
+     */
     private void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
         usuario = new JTextField();
@@ -91,6 +110,14 @@ public class Login extends JPanel {
         add(panel);
     }
 
+    /**
+     * Realiza el proceso de inicio de sesión.
+     * Obtiene el correo electrónico y la contraseña ingresados por el usuario.
+     * Verifica si las credenciales son válidas consultando la base de datos.
+     * Si las credenciales son válidas, se establece el estado de inicio de sesión
+     * en el formulario principal.
+     * Si las credenciales no son válidas, se muestra un mensaje de error.
+     */
     private void login() {
         String usuario = this.usuario.getText();
         String password = new String(this.password.getPassword());

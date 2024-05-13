@@ -30,13 +30,17 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import reto.utilidades.*;
-
 import reto.sql.*;
 import reto.objects.*;
 import reto.components.*;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * Esta clase representa la ventana de gestión de datos.
+ * Proporciona una interfaz gráfica para cargar y visualizar datos de
+ * profesores.
+ */
 public class Gestionar extends JPanel {
     private JTable table;
     private SolicitudDAO solicitudSQL = new SolicitudDAO();
@@ -65,10 +69,20 @@ public class Gestionar extends JPanel {
     private JButton cancelar = new JButton("Cancelar");
     private JTextArea comentario_estado_text;
 
+    /**
+     * Constructor de la clase Gestionar.
+     * Inicializa la ventana y llama al método init() para configurar los
+     * componentes.
+     */
     public Gestionar() {
         init();
     }
 
+    /**
+     * Método privado que configura los componentes de la ventana.
+     * Utiliza el administrador de diseño MigLayout para organizar los componentes
+     * en la ventana.
+     */
     private void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
 
@@ -88,6 +102,11 @@ public class Gestionar extends JPanel {
         add(panel);
     }
 
+    /**
+     * Crea el panel que contiene la lista de solicitudes.
+     * 
+     * @return El componente JPanel que contiene la lista de solicitudes.
+     */
     private Component creaLista() {
         JPanel panel = new JPanel(new MigLayout("wrap, fillx, insets 5 5 0 5", "[fill]"));
         panel.putClientProperty(FlatClientProperties.STYLE,
@@ -98,6 +117,11 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Crea el panel que muestra los detalles de una solicitud seleccionada.
+     * 
+     * @return El componente JPanel que muestra los detalles de la solicitud.
+     */
     private Component creaVisor() {
         JPanel panel = new JPanel(new MigLayout("wrap, fillx, insets 5 5 0 5", "[fill]"));
         panel.putClientProperty(FlatClientProperties.STYLE,
@@ -108,6 +132,11 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Crea la tabla que muestra la lista de solicitudes.
+     * 
+     * @return El componente JPanel que contiene la tabla de solicitudes.
+     */
     private Component crearTabla() {
         JPanel panel = new JPanel(new MigLayout("fill"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -139,6 +168,9 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Actualiza la tabla de solicitudes con los datos de la base de datos.
+     */
     private void actualizarTabla() {
         DefaultTableModel model;
 
@@ -170,6 +202,10 @@ public class Gestionar extends JPanel {
         datosSolicitadas();
     }
 
+    /**
+     * Obtiene los datos de las solicitudes de la base de datos y los muestra en la
+     * tabla.
+     */
     public void datosSolicitadas() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Solicitud> solicitudes = solicitudSQL.listar();
@@ -193,6 +229,11 @@ public class Gestionar extends JPanel {
         }
     }
 
+    /**
+     * Carga los datos de una solicitud seleccionada en los campos correspondientes.
+     * 
+     * @param id El ID de la solicitud seleccionada.
+     */
     private void cargaSolicitud(int id) {
         responsables_text.setText("");
         participantes_text.setText("");
@@ -279,6 +320,15 @@ public class Gestionar extends JPanel {
         }
     }
 
+    /**
+     * Este método crea un panel de cabecera con campos de información de la
+     * solicitud.
+     * Los campos incluyen Id, Departamento, Tipo, Solicitante y si está prevista en
+     * el currículo.
+     * Todos los campos son no editables.
+     * 
+     * @return Componente que representa el panel de cabecera.
+     */
     private Component cabecera() {
         JPanel panel = new JPanel(new MigLayout("wrap, fillx, insets 5 5 0 5", "[fill]"));
         panel.putClientProperty(FlatClientProperties.STYLE,
@@ -325,6 +375,15 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel de cuerpo con campos de información detallada de la
+     * solicitud.
+     * Los campos incluyen Título, Fechas de inicio y fin, Medios de transporte,
+     * Responsables, Participantes y Comentarios.
+     * Todos los campos son no editables.
+     * 
+     * @return Componente que representa el panel de cuerpo.
+     */
     private Component cuerpo() {
         JPanel panel = new JPanel(new MigLayout("wrap, fillx, insets 5 5 0 5", "[fill]"));
         panel.putClientProperty(FlatClientProperties.STYLE,
@@ -376,6 +435,13 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel de alojamiento con campos de información sobre si
+     * se requiere alojamiento y comentarios.
+     * Todos los campos son no editables.
+     * 
+     * @return Componente que representa el panel de alojamiento.
+     */
     private Component introAlojamiento() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -397,6 +463,13 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel de alumnos con campos de información sobre los
+     * grupos/cursos participantes y el número de alumnos.
+     * Todos los campos son no editables.
+     * 
+     * @return Componente que representa el panel de alumnos.
+     */
     private Component introAlumnos() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -423,6 +496,12 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método crea un panel de aceptación con campos de comentarios del
+     * administrador y botones para aceptar o denegar la solicitud.
+     * 
+     * @return Componente que representa el panel de aceptación.
+     */
     private Component introAceptada() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -507,6 +586,13 @@ public class Gestionar extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método establece un filtro de documento en un campo de texto para
+     * limitar el número de caracteres que se pueden introducir.
+     * 
+     * @param campo      Campo de texto al que se aplica el filtro.
+     * @param caracteres Número máximo de caracteres permitidos.
+     */
     private void setDocumentfilter(JTextArea campo, int caracteres) {
         DocumentFilter filter = Utils.limitaCaracteres(caracteres);
         ((PlainDocument) campo.getDocument()).setDocumentFilter(filter);

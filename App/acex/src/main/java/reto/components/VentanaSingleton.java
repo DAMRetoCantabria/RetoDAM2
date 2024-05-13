@@ -56,6 +56,7 @@ public class VentanaSingleton {
      *
      * @param titulo    El título de la ventana interna.
      * @param contenido El componente que se mostrará dentro de la ventana interna.
+     * @param size      El tamaño de la ventana interna.
      */
     public void mostrarVentana(String titulo, Component contenido, Dimension size) {
         JInternalFrame frame = new JInternalFrame(titulo, true, true, true, true);
@@ -67,7 +68,13 @@ public class VentanaSingleton {
         ventanas.put(titulo, frame); // Guarda la ventana en el mapa
     }
 
-    // Método para cerrar la ventana actual
+    /**
+     * Este método se utiliza para cerrar una ventana interna (JInternalFrame)
+     * y eliminarla del mapa de ventanas. La ventana a cerrar se identifica
+     * por su título.
+     *
+     * @param titulo El título de la ventana que se va a cerrar.
+     */
     public void cerrarVentana(String titulo) {
         JInternalFrame frame = ventanas.get(titulo);
         if (frame != null) {

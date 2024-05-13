@@ -7,9 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import reto.objects.*;
 
+/**
+ * Esta clase implementa la interfaz RepositorioSolicitud y proporciona métodos
+ * para acceder a la base de datos
+ * y realizar operaciones CRUD en la tabla "programadas".
+ */
 public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
 
     /**
@@ -107,6 +111,13 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return null;
     }
 
+    /**
+     * Este método guarda un responsable asociado a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada  El ID de la programada.
+     * @param id_responsable El ID del responsable.
+     */
     public void guardarResponsable(int id_programada, int id_responsable) {
         String sql = "INSERT INTO responsables_programada(id_programada, id_responsable) VALUES (?,?)";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -124,6 +135,13 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método guarda un participante asociado a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada   El ID de la programada.
+     * @param id_participante El ID del participante.
+     */
     public void guardarParticipante(int id_programada, int id_participante) {
         String sql = "INSERT INTO participantes_programada(id_programada, id_participante) VALUES (?,?)";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -141,6 +159,13 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método guarda un transporte asociado a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada El ID de la programada.
+     * @param id_transporte El ID del transporte.
+     */
     public void guardarTransporte(int id_programada, int id_transporte) {
         String sql = "INSERT INTO transporte_programado(id_programada, id_transporte) VALUES (?,?)";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -158,6 +183,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método guarda un curso asociado a una programada en la base de datos.
+     * 
+     * @param id_programada El ID de la programada.
+     * @param id_curso      El ID del curso.
+     */
     public void guardarCurso(int id_programada, int id_curso) {
         String sql = "INSERT INTO cursos_programadas(id_programada, id_curso) VALUES (?,?)";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -175,6 +206,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método guarda un grupo asociado a una programada en la base de datos.
+     * 
+     * @param id_programada El ID de la programada.
+     * @param id_grupo      El ID del grupo.
+     */
     public void guardarGrupo(int id_programada, int id_grupo) {
         String sql = "INSERT INTO grupos_programadas(id_programada, id_grupo) VALUES (?,?)";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -192,6 +229,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método busca y devuelve los responsables asociados a una solicitud.
+     * 
+     * @param id_solicitud El ID de la solicitud.
+     * @return Una lista de objetos Profesor que son los responsables.
+     */
     public List<Profesor> buscaResponsable(int id_solicitud) {
         String sql = "SELECT id_responsable FROM responsables WHERE id_actividad=?";
         ProfesorDAO profesorSQL = new ProfesorDAO();
@@ -214,6 +257,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return participantes;
     }
 
+    /**
+     * Este método busca y devuelve los transportes asociados a una solicitud.
+     * 
+     * @param id_solicitud El ID de la solicitud.
+     * @return Una lista de objetos MediosTransporte que son los transportes.
+     */
     public List<MediosTransporte> buscaTransporte(int id_solicitud) {
         String sql = "SELECT id_transporte FROM transporte WHERE id_actividad=?";
         TransporteDAO transporteSQL = new TransporteDAO();
@@ -236,6 +285,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return transportes;
     }
 
+    /**
+     * Este método busca y devuelve los cursos asociados a una solicitud.
+     * 
+     * @param id_solicitud El ID de la solicitud.
+     * @return Una lista de objetos Curso que son los cursos.
+     */
     public List<Curso> buscaCursos(int id_solicitud) {
         String sql = "SELECT id_curso FROM cursos_participa WHERE id_actividad=?";
         CursosDAO cursoSQL = new CursosDAO();
@@ -258,6 +313,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return cursos;
     }
 
+    /**
+     * Este método busca y devuelve los grupos asociados a una solicitud.
+     * 
+     * @param id_solicitud El ID de la solicitud.
+     * @return Una lista de objetos Grupo que son los grupos.
+     */
     public List<Grupo> buscaGrupos(int id_solicitud) {
         String sql = "SELECT id_grupo FROM grupos_participa WHERE id_actividad=?";
         GruposDAO grupoSQL = new GruposDAO();
@@ -280,6 +341,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return grupos;
     }
 
+    /**
+     * Este método busca y devuelve los participantes asociados a una solicitud.
+     * 
+     * @param id_solicitud El ID de la solicitud.
+     * @return Una lista de objetos Profesor que son los participantes.
+     */
     public List<Profesor> buscaParticipantes(int id_solicitud) {
         String sql = "SELECT id_participante FROM participantes WHERE id_actividad=?";
         ProfesorDAO profesorSQL = new ProfesorDAO();
@@ -302,6 +369,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         return participantes;
     }
 
+    /**
+     * Este método borra los participantes asociados a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada El ID de la programada.
+     */
     public void borraParticipantes(int id_programada) {
         String sql = "DELETE FROM participantes_programada WHERE id_programada=?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -312,6 +385,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método borra los responsables asociados a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada El ID de la programada.
+     */
     public void borraResponsables(int id_programada) {
         String sql = "DELETE FROM responsables_programada WHERE id_programada=?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -322,6 +401,12 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método borra los transportes asociados a una programada en la base de
+     * datos.
+     * 
+     * @param id_programada El ID de la programada.
+     */
     public void borraTransportes(int id_programada) {
         String sql = "DELETE FROM transporte_programado WHERE id_programada=?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -332,6 +417,11 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método borra los cursos asociados a una programada en la base de datos.
+     * 
+     * @param id_programada El ID de la programada.
+     */
     public void borraCursos(int id_programada) {
         String sql = "DELETE FROM cursos_programadas WHERE id_programada=?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {
@@ -342,6 +432,11 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
         }
     }
 
+    /**
+     * Este método borra los grupos asociados a una programada en la base de datos.
+     * 
+     * @param id_programada El ID de la programada.
+     */
     public void borraGrupos(int id_programada) {
         String sql = "DELETE FROM grupos_programadas WHERE id_programada=?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);) {

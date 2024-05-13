@@ -4,6 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.util.Comparator;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -12,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
 import reto.components.PerfilTabla;
 import reto.objects.Profesor;
 import reto.objects.Programadas;
@@ -20,11 +20,13 @@ import reto.objects.Solicitud;
 import reto.sql.*;
 import reto.components.VentanaSingleton;
 import java.awt.*;
-
 import com.formdev.flatlaf.FlatClientProperties;
-
 import net.miginfocom.swing.MigLayout;
 
+/**
+ * Esta clase representa una ventana que muestra un listado de actividades.
+ * Extiende de JPanel y contiene una tabla con información de las actividades.
+ */
 public class Listado_actividades extends JPanel {
     private JTable table;
     private int tipo;
@@ -32,11 +34,19 @@ public class Listado_actividades extends JPanel {
     private SolicitudDAO solicitudSQL = new SolicitudDAO();
     private ProgramadasDAO programadasSQL = new ProgramadasDAO();
 
+    /**
+     * Constructor de la clase Listado_actividades.
+     * 
+     * @param tipo El tipo de actividades a mostrar en la tabla.
+     */
     public Listado_actividades(int tipo) {
         this.tipo = tipo;
         init();
     }
 
+    /**
+     * Inicializa la interfaz de la ventana y sus componentes.
+     */
     public void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
 
@@ -53,6 +63,11 @@ public class Listado_actividades extends JPanel {
         add(panel);
     }
 
+    /**
+     * Crea y configura la tabla que muestra las actividades.
+     * 
+     * @return El componente de la tabla.
+     */
     private Component crearTabla() {
         JPanel panel = new JPanel(new MigLayout("fill, insets 20", "[center]", "[center]"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -68,6 +83,9 @@ public class Listado_actividades extends JPanel {
         return panel;
     }
 
+    /**
+     * Actualiza los datos de la tabla de actividades.
+     */
     private void actualizarTabla() {
         DefaultTableModel model;
         model = new DefaultTableModel(new Object[][] {}, new String[] { "Id", "Titulo", "Tipo",
@@ -140,6 +158,9 @@ public class Listado_actividades extends JPanel {
         }
     }
 
+    /**
+     * Carga los datos de las solicitudes en la tabla.
+     */
     public void datosSolicitadas() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Solicitud> solicitudes = solicitudSQL.listar();
@@ -176,6 +197,9 @@ public class Listado_actividades extends JPanel {
         }
     }
 
+    /**
+     * Carga los datos de las actividades programadas en la tabla.
+     */
     public void datosAprobadas() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Programadas> programadas = programadasSQL.listar();
@@ -212,13 +236,13 @@ public class Listado_actividades extends JPanel {
         }
     }
 
+    /**
+     * Configura el ancho de las columnas de la tabla de solicitudes.
+     */
     private void anchoTablaSolicitadas() {
         TableColumnModel columnModel = table.getColumnModel();
         columnModel.getColumn(0).setPreferredWidth(15);
         columnModel.getColumn(1).setPreferredWidth(60);
         columnModel.getColumn(2).setPreferredWidth(35);
-        columnModel.getColumn(3).setPreferredWidth(60);
-        columnModel.getColumn(4).setPreferredWidth(30);
-        columnModel.getColumn(5).setPreferredWidth(30);
     }
 }

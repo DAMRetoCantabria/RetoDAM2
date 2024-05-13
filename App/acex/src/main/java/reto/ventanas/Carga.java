@@ -15,6 +15,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * La clase Carga es un panel que permite cargar datos de profesores desde un
+ * archivo CSV.
+ * Extiende de JPanel y contiene componentes como etiquetas, botones y campos de
+ * texto.
+ */
 public class Carga extends JPanel {
 
     private JLabel texto1;
@@ -27,10 +33,17 @@ public class Carga extends JPanel {
     private int introducidos;
     private JLabel resultado;
 
+    /**
+     * Constructor de la clase Carga.
+     * Inicializa los componentes y llama al método init().
+     */
     public Carga() {
         init();
     }
 
+    /**
+     * Inicializa los componentes del panel y los agrega al layout.
+     */
     private void init() {
         resultado = new JLabel("");
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
@@ -70,6 +83,11 @@ public class Carga extends JPanel {
         add(panel);
     }
 
+    /**
+     * Crea y devuelve un panel que contiene un botón para buscar un archivo CSV.
+     * 
+     * @return El panel con el botón de búsqueda.
+     */
     private Component creaBoton() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -96,6 +114,11 @@ public class Carga extends JPanel {
         return panel;
     }
 
+    /**
+     * Crea y devuelve un panel que muestra el estado actual de la carga de datos.
+     * 
+     * @return El panel con el estado de la carga.
+     */
     private Component crearEstado() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -106,6 +129,11 @@ public class Carga extends JPanel {
         return panel;
     }
 
+    /**
+     * Actualiza la base de datos con los datos del archivo CSV seleccionado.
+     * 
+     * @param selectedFile El archivo CSV seleccionado.
+     */
     private void updateaConCsv(File selectedFile) {
         try {
             CSVReader reader = new CSVReaderBuilder(new FileReader(selectedFile))
@@ -172,6 +200,12 @@ public class Carga extends JPanel {
         }
     }
 
+    /**
+     * Verifica si el archivo CSV seleccionado es válido.
+     * 
+     * @param selectedFile El archivo CSV seleccionado.
+     * @return true si el archivo es válido, false de lo contrario.
+     */
     private boolean csvValido(File selectedFile) {
         try {
             CSVReader reader = new CSVReaderBuilder(new FileReader(selectedFile))
@@ -196,6 +230,9 @@ public class Carga extends JPanel {
         }
     }
 
+    /**
+     * Pone a cero el estado de los profesores en la base de datos.
+     */
     private void ponerACero() {
         ProfesorDAO profesorDAO = new ProfesorDAO();
         profesorDAO.listar().forEach(profesor -> {

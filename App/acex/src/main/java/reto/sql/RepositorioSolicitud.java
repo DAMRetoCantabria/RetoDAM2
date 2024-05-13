@@ -2,6 +2,13 @@ package reto.sql;
 
 import java.util.List;
 
+/**
+ * Esta interfaz defino los metodos que deben implementar
+ * las clases de acceso a datos relacionadas co las
+ * solicitudes tanto pendientes como aprobadas.
+ * 
+ * @param <T> El tipo de objeto que este repositorio manejará.
+ */
 public interface RepositorioSolicitud<T> {
 
     /**

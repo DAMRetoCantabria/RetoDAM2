@@ -1,7 +1,6 @@
 package reto.ventanas;
 
 import java.awt.Dimension;
-
 import javax.swing.*;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
@@ -9,11 +8,26 @@ import raven.swing.AvatarIcon;
 import reto.components.*;
 import reto.sql.*;
 
+/**
+ * La clase Perfil representa una ventana que muestra el perfil de un usuario.
+ * Esta clase extiende de JPanel y utiliza el gestor de diseño MigLayout para
+ * organizar los componentes.
+ */
 public class Perfil extends JPanel {
+    /**
+     * Crea una nueva instancia de la clase Perfil.
+     * Se llama al método init() para inicializar la ventana.
+     */
     public Perfil() {
         init();
     }
 
+    /**
+     * Inicializa la ventana del perfil.
+     * Configura el gestor de diseño, crea y configura los componentes de la
+     * ventana,
+     * y los agrega al panel principal.
+     */
     private void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
 

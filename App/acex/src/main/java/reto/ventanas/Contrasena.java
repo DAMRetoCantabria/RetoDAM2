@@ -16,6 +16,16 @@ import reto.sql.ProfesorDAO;
 import reto.utilidades.Utils;
 import reto.components.*;
 
+/**
+ * Esta clase representa una ventana para cambiar la contraseña de un profesor.
+ * La ventana muestra campos para ingresar la contraseña actual, la nueva
+ * contraseña y la confirmación de la nueva contraseña.
+ * También muestra la fortaleza de la nueva contraseña y proporciona botones
+ * para aceptar y cancelar el cambio de contraseña.
+ * 
+ * La clase extiende JPanel y utiliza el diseño de MigLayout para organizar los
+ * componentes en la ventana.
+ */
 public class Contrasena extends JPanel {
 
     private JLabel contrasena;
@@ -32,12 +42,28 @@ public class Contrasena extends JPanel {
     private ProfesorDAO profesorDAO;
     private JLabel titulo;
 
+    /**
+     * Constructor de la clase Contrasena.
+     * Inicializa la instancia de la clase con el formulario principal y el profesor
+     * proporcionados.
+     * Luego llama al método init() para inicializar el resto de los componentes.
+     *
+     * @param mainform El formulario principal de la aplicación.
+     * @param profesor El profesor para el que se está creando o cambiando la
+     *                 contraseña.
+     */
     public Contrasena(MainForm mainform, Profesor profesor) {
         this.mainForm = mainform;
         this.profesor = profesor;
         init();
     }
 
+    /**
+     * Método para inicializar los componentes de la interfaz de usuario y
+     * configurar el diseño.
+     * Crea y configura los campos de texto, botones y otros componentes necesarios
+     * para la interfaz de usuario.
+     */
     private void init() {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
         profesorDAO = new ProfesorDAO();
@@ -92,6 +118,13 @@ public class Contrasena extends JPanel {
         add(panel);
     }
 
+    /**
+     * Crea y configura los botones "Aceptar" y "Cancelar" para la interfaz de
+     * usuario.
+     * Los botones se añaden a un panel que se devuelve como un componente.
+     *
+     * @return Un componente que contiene los botones "Aceptar" y "Cancelar".
+     */
     public Component creaBotones() {
         JPanel panel = new JPanel(new MigLayout("insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -107,6 +140,12 @@ public class Contrasena extends JPanel {
         return panel;
     }
 
+    /**
+     * Método que se llama cuando se hace clic en el botón "Aceptar".
+     * Realiza varias comprobaciones en las contraseñas introducidas y, si pasan
+     * todas las comprobaciones,
+     * actualiza la contraseña del profesor en la base de datos.
+     */
     private void aceptar() {
         if (contrasena1.getPassword().length == 0 || contrasena3.getPassword().length == 0) {
             JOptionPane.showMessageDialog(null, "Debes introducir los dos campos de contraseña.");

@@ -13,7 +13,6 @@ public class Profesor {
     private Nivel nivel;
     private boolean activo;
     private String foto;
-    // private int departamento;
     private Departamento departamento;
 
     /**
@@ -31,7 +30,7 @@ public class Profesor {
      * @param departamento el departamento al que pertenece el profesor
      */
     public Profesor(int id, String dni, String nombre, String apellidos, String correo, String password, Nivel nivel,
-            boolean activo, String foto, /* int departamento */ Departamento departamento) {
+            boolean activo, String foto, Departamento departamento) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
@@ -58,7 +57,6 @@ public class Profesor {
         } else {
             this.departamento = departamento;
         }
-        // this.departamento = departamento;
     }
 
     /**
@@ -211,12 +209,17 @@ public class Profesor {
     /**
      * Establece si el profesor esta activo
      * 
-     * @param nivel el nuevo estado del profesor
+     * @param activo el nuevo estado del profesor
      */
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
 
+    /**
+     * Este método se utiliza para obtener la instancia actual del objeto Profesor.
+     *
+     * @return La instancia actual del objeto Profesor.
+     */
     public Profesor getProfesor() {
         return this;
     }

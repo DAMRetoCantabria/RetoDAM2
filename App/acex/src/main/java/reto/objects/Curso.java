@@ -89,11 +89,25 @@ public class Curso {
         return activo;
     }
 
+    /**
+     * Este método se utiliza para obtener el número de alumnos en un curso.
+     * Crea una instancia de CursosDAO y llama a su método getNumAlumnos, pasando
+     * el id de este curso como argumento.
+     *
+     * @return El número de alumnos en el curso.
+     */
     public int getNumAlumnos() {
         CursosDAO cursoDAO = new CursosDAO();
         return cursoDAO.getNumAlumnos(this.id);
     }
 
+    /**
+     * Sobrescribe el método equals para comparar si dos objetos Curso son iguales.
+     * Dos objetos Curso se consideran iguales si tienen el mismo id.
+     *
+     * @param obj El objeto a comparar con este Curso.
+     * @return true si los objetos son iguales, false en caso contrario.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

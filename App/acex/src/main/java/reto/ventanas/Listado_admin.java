@@ -12,15 +12,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
 import com.formdev.flatlaf.FlatClientProperties;
-import com.mysql.cj.xdevapi.Table;
-
 import net.miginfocom.swing.MigLayout;
 import reto.components.*;
 import reto.objects.*;
 import reto.sql.*;
 
+/**
+ * Clase Listado_admin que extiende de JPanel. Esta clase se encarga de la
+ * gestión de datos.
+ */
 public class Listado_admin extends JPanel {
     private JComboBox<String> comboBox;
     private JTable table;
@@ -35,10 +36,20 @@ public class Listado_admin extends JPanel {
     private DepartamentoDAO departamentoSQL = new DepartamentoDAO();
     private MouseAdapter evento2click = null;
 
+    /**
+     * Constructor de la clase Listado_admin.
+     * 
+     * @param seleccionado Índice del elemento seleccionado en el comboBox.
+     */
     public Listado_admin(int seleccionado) {
         init(seleccionado);
     }
 
+    /**
+     * Método para inicializar los componentes y configurar el layout.
+     * 
+     * @param seleccionado Índice del elemento seleccionado en el comboBox.
+     */
     public void init(int seleccionado) {
         setLayout(new MigLayout("fill, insets 20", "[center]", "[center]"));
 
@@ -65,6 +76,12 @@ public class Listado_admin extends JPanel {
         add(panel);
     }
 
+    /**
+     * Método para crear la tabla y configurar los botones de editar, borrar y
+     * crear.
+     * 
+     * @return Componente que contiene la tabla y los botones.
+     */
     private Component crearTabla() {
         JPanel panel = new JPanel(new MigLayout("fill, insets 20", "[center]", "[center]"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
@@ -184,6 +201,15 @@ public class Listado_admin extends JPanel {
         return panel;
     }
 
+    /**
+     * Este método actualiza la tabla de la interfaz de usuario en función del tema
+     * proporcionado.
+     * Crea un modelo de tabla y lo configura en función del tema.
+     * También configura los oyentes de eventos y los comparadores para la tabla.
+     *
+     * @param tema El tema en función del cual se actualiza la tabla. Puede ser
+     *             "profesores", "cursos", "grupos" o "departamentos".
+     */
     private void actualizarTabla(String tema) {
         DefaultTableModel model;
         this.tema = tema;
@@ -303,6 +329,10 @@ public class Listado_admin extends JPanel {
 
     }
 
+    /**
+     * Este método configura el ancho de las columnas de la tabla en función del
+     * tema seleccionado.
+     */
     private void anchoTabla() {
         TableColumnModel columnModel = table.getColumnModel();
         String tema = (String) comboBox.getSelectedItem();
@@ -335,6 +365,10 @@ public class Listado_admin extends JPanel {
         }
     }
 
+    /**
+     * Este método llena la tabla con los datos de los profesores.
+     * Obtiene la lista de profesores y los añade a la tabla.
+     */
     public void datosProfesores() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Profesor> profesores = profesorSQL.listar();
@@ -352,6 +386,10 @@ public class Listado_admin extends JPanel {
         }
     }
 
+    /**
+     * Este método llena la tabla con los datos de los cursos.
+     * Obtiene la lista de cursos y los añade a la tabla.
+     */
     public void datosCursos() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Curso> cursos = cursoSQL.listar();
@@ -366,6 +404,10 @@ public class Listado_admin extends JPanel {
         }
     }
 
+    /**
+     * Este método llena la tabla con los datos de los grupos.
+     * Obtiene la lista de grupos y los añade a la tabla.
+     */
     public void datosGrupos() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Grupo> grupos = gruposSQL.listar();
@@ -380,6 +422,10 @@ public class Listado_admin extends JPanel {
         }
     }
 
+    /**
+     * Este método llena la tabla con los datos de los departamentos.
+     * Obtiene la lista de departamentos y los añade a la tabla.
+     */
     public void datosDepartamentos() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         List<Departamento> departamentos = departamentoSQL.listar();

@@ -7,7 +7,6 @@ public class Departamento {
     private int id;
     private String codigo;
     private String nombre;
-    //private int jefee;
     private Profesor jefe;
 
     /**
@@ -17,13 +16,12 @@ public class Departamento {
      * @param id     el ID del departamento
      * @param codigo el código del departamento
      * @param nombre el nombre del departamento
-     * @param jefee   el ID del jefee del departamento
+     * @param jefe   el objeto del jefe del departamento
      */
-    public Departamento(int id, String codigo, String nombre, /*int jefee,*/ Profesor jefe) {
+    public Departamento(int id, String codigo, String nombre, Profesor jefe) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
-        //this.jefee = jefee;
         if (jefe != null) {
             this.jefe = jefe;
         } else {
@@ -32,16 +30,16 @@ public class Departamento {
     }
 
     /**
-     * Crea un nuevo objeto Departamento con el código, nombre y jefee especificados.
+     * Crea un nuevo objeto Departamento con el código, nombre y jefee
+     * especificados.
      * 
      * @param codigo el código del departamento
      * @param nombre el nombre del departamento
-     * @param jefee   el ID del jefee del departamento
+     * @param jefe   el objeto del jefe del departamento
      */
-    public Departamento(String codigo, String nombre, /*int jefee*/ Profesor jefe) {
+    public Departamento(String codigo, String nombre, Profesor jefe) {
         this.codigo = codigo;
         this.nombre = nombre;
-        //this.jefee = jefee;
         if (jefe != null) {
             this.jefe = jefe;
         } else {
@@ -81,9 +79,10 @@ public class Departamento {
      * 
      * @return el ID del jefee del departamento
      *
-    *public int getjefee() {
-    *    return jefee;
-    }*/
+     *         public int getjefee() {
+     *         return jefee;
+     *         }
+     */
 
     public Profesor getJefe() {
         return jefe;

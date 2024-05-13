@@ -27,11 +27,6 @@ import javax.swing.plaf.basic.ComboPopup;
 import net.miginfocom.swing.MigLayout;
 
 /**
- *
- * @author RAVEN
- * @param <E>
- */
-/**
  * Esta clase representa un componente de selección múltiple personalizado que
  * extiende JComboBox.
  * Permite seleccionar múltiples elementos de una lista desplegable.
@@ -43,10 +38,20 @@ import net.miginfocom.swing.MigLayout;
  */
 public class Multiseleccion<E> extends JComboBox<E> {
 
+    /**
+     * Obtiene los elementos seleccionados en el componente.
+     * 
+     * @return una lista de los elementos seleccionados
+     */
     public List<Object> getSelectedItems() {
         return selectedItems;
     }
 
+    /**
+     * Establece los elementos seleccionados en el componente.
+     * 
+     * @param selectedItems una lista de elementos a seleccionar
+     */
     public void setSelectedItems(List<Object> selectedItems) {
         List<Object> comboItem = new ArrayList<>();
         int count = getItemCount();
@@ -61,6 +66,9 @@ public class Multiseleccion<E> extends JComboBox<E> {
         comboItem.clear();
     }
 
+    /**
+     * Limpia los elementos seleccionados en el componente.
+     */
     public void clearSelectedItems() {
         selectedItems.clear();
         Component editorCom = getEditor().getEditorComponent();
@@ -78,6 +86,13 @@ public class Multiseleccion<E> extends JComboBox<E> {
     private final ComboBoxMultiCellEditor comboBoxMultiCellEditor;
     private Component comboList;
 
+    /**
+     * Este método se utiliza para eliminar un objeto de la lista de elementos
+     * seleccionados
+     * y del comboBoxMultiCellEditor. Si comboList no es nulo, se repinta.
+     *
+     * @param obj El objeto que se va a eliminar.
+     */
     private void removeItemObject(Object obj) {
         selectedItems.remove(obj);
         comboBoxMultiCellEditor.removeItem(obj);
@@ -86,6 +101,13 @@ public class Multiseleccion<E> extends JComboBox<E> {
         }
     }
 
+    /**
+     * Este método se utiliza para agregar un objeto a la lista de elementos
+     * seleccionados
+     * y al comboBoxMultiCellEditor. Si comboList no es nulo, se repinta.
+     *
+     * @param obj El objeto que se va a agregar.
+     */
     private void addItemObject(Object obj) {
         selectedItems.add(obj);
         comboBoxMultiCellEditor.addItem(obj);
@@ -94,6 +116,9 @@ public class Multiseleccion<E> extends JComboBox<E> {
         }
     }
 
+    /**
+     * Crea una nueva instancia de Multiseleccion.
+     */
     public Multiseleccion() {
         setUI(new ComboBoxMultiUI());
         comboBoxMultiCellEditor = new ComboBoxMultiCellEditor();
@@ -113,6 +138,16 @@ public class Multiseleccion<E> extends JComboBox<E> {
         });
     }
 
+    /**
+     * Sobrescribe el método setPopupVisible. Este método se utiliza para controlar
+     * la visibilidad del menú desplegable de un JComboBox. En esta implementación,
+     * el cuerpo del método está vacío, lo que significa que no realiza ninguna
+     * acción
+     * cuando se le llama.
+     *
+     * @param v Un valor booleano que indica si el menú desplegable debe ser visible
+     *          o no.
+     */
     @Override
     public void setPopupVisible(boolean v) {
 
