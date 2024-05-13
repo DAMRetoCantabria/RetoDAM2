@@ -292,7 +292,6 @@ En la sección galería la opción escogida fue una tabla que muestre las imagen
   background: linear-gradient(rgba(37, 71, 30, 0.5), rgba(0, 0, 0, 0.5));
 }
 
-
 #galeria::before {
   content: "";
   position: absolute;
@@ -592,7 +591,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Documentacion/EntidadRelacion.png)
+![Diagrama de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/UML.png)
 
   ### Javadoc
 
