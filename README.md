@@ -586,6 +586,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 ```
+</details>
 
 # 4.- APLICACION
 
