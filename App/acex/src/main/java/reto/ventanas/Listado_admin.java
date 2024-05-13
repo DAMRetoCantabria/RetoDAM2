@@ -5,11 +5,17 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import com.formdev.flatlaf.FlatClientProperties;
+import com.mysql.cj.xdevapi.Table;
+
 import net.miginfocom.swing.MigLayout;
 import reto.components.*;
 import reto.objects.*;
@@ -226,6 +232,24 @@ public class Listado_admin extends JPanel {
             model.removeRow(0);
         }
         table.setModel(model);
+        TableRowSorter<TableModel> organizador = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(organizador);
+
+        organizador.setComparator(0, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        });
+
+        if (tema.toLowerCase().equals("grupos")) {
+            organizador.setComparator(3, new Comparator<Integer>() {
+                @Override
+                public int compare(Integer o1, Integer o2) {
+                    return Integer.compare(o1, o2);
+                }
+            });
+        }
 
         if (evento2click != null) {
             table.removeMouseListener(evento2click);

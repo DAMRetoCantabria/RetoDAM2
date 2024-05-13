@@ -5,6 +5,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import reto.sql.ProgramadasDAO;
+import reto.sql.SolicitudDAO;
+
 public class Programadas {
     private int id_programada;
     private Solicitud solicitada;
@@ -174,7 +177,15 @@ public class Programadas {
         return solicitante.getDepartamento().getId();
     }
 
-    public String getSolicitante() {
+    public Profesor getSolicitante() {
+        return solicitante;
+    }
+
+    public Solicitud getSolicitada() {
+        return solicitada;
+    }
+
+    public String get_Solicitante() {
         return solicitante.getNombre().concat(" ")
                 .concat(solicitante.getApellidos());
     }
@@ -197,6 +208,68 @@ public class Programadas {
 
     public List<Grupo> getGrupos() {
         return grupos;
+    }
+
+    public boolean equals(Object obj, List<Profesor> participantesNombre, List<Profesor> responsablesNombre,
+            List<MediosTransporte> transportes, /* List<String> alumnosNombre, */List<Curso> cursos, List<Grupo> grupos,
+            boolean curso) {
+        ProgramadasDAO programadaSQL = new ProgramadasDAO();
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Programadas programada = (Programadas) obj;
+
+        boolean transporte = ((transp_comentario == null && programada.transp_comentario == null)
+                || transp_comentario.equals(programada.transp_comentario));
+
+        boolean alojamiento = ((aloj_comentario == null && programada.aloj_comentario == null)
+                || aloj_comentario.equals(programada.aloj_comentario));
+
+        boolean com = ((comentario == null && programada.comentario == null)
+                || comentario.equals(programada.comentario));
+
+        List<Integer> transportes_id = new ArrayList<>();
+
+        for (MediosTransporte s : transportes) {
+            transportes_id.add(s.getId());
+        }
+
+        boolean parti = (programadaSQL.buscaParticipantes(programada.getId_programada()).containsAll(participantes)
+                && programadaSQL.buscaParticipantes(programada.getId_programada()).size() == participantes.size());
+
+        boolean respo = (programadaSQL.buscaResponsable(programada.getId_programada()).containsAll(responsables)
+                && programadaSQL
+                        .buscaResponsable(programada.getId_programada()).size() == responsables.size());
+
+        boolean tran = (programadaSQL.buscaTransporte(programada.getId_programada()).containsAll(transportes)
+                && programadaSQL.buscaTransporte(programada.getId_programada()).size() == transportes.size());
+
+        boolean alu = false;
+
+        if (curso) {
+            alu = (programadaSQL.buscaCursos(programada.getId_programada()).containsAll(cursos)
+                    && programadaSQL.buscaCursos(programada.getId_programada()).size() == cursos.size());
+        } else {
+            alu = (programadaSQL.buscaGrupos(programada.getId_programada()).containsAll(grupos)
+                    && programadaSQL.buscaGrupos(programada.getId_programada()).size() == grupos.size());
+        }
+
+        return id_programada == programada.id_programada &&
+                solicitante.equals(programada.solicitante) &&
+                previsto == programada.previsto &&
+                transp_requerido == programada.transp_requerido &&
+                aloj_requerido == programada.aloj_requerido &&
+                titulo.equals(programada.titulo) &&
+                tipo == programada.tipo &&
+                fini.equals(programada.fini) &&
+                ffin.equals(programada.ffin) &&
+                hini.equals(programada.hini) &&
+                hfin.equals(programada.hfin) &&
+                transporte && alojamiento && parti &&
+                respo && com && tran && alu;
     }
 
 }

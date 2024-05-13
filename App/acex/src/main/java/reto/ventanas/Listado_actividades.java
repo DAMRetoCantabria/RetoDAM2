@@ -1,7 +1,7 @@
 package reto.ventanas;
 
-import java.awt.Component;
 import java.awt.event.MouseAdapter;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,6 +10,9 @@ import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 import reto.components.PerfilTabla;
 import reto.objects.Profesor;
 import reto.objects.Programadas;
@@ -79,6 +82,16 @@ public class Listado_actividades extends JPanel {
         }
         table.setModel(model);
 
+        TableRowSorter<TableModel> organizador = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(organizador);
+
+        organizador.setComparator(0, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        });
+
         if (evento2click != null) {
             table.removeMouseListener(evento2click);
             evento2click = null;
@@ -92,10 +105,8 @@ public class Listado_actividades extends JPanel {
                         JTable target = (JTable) e.getSource();
                         int row = target.getSelectedRow();
                         int id = (int) table.getValueAt(row, 0);
-                        System.out.println(id);
                         ProgramadasDAO programadasSQL = new ProgramadasDAO();
                         Programadas programada = programadasSQL.buscar(id);
-                        System.out.println(programada);
                         VentanaSingleton.getInstance().mostrarVentana("Actividades Programadas",
                                 new Solicitudes(3, programada),
                                 new Dimension(700, 700));

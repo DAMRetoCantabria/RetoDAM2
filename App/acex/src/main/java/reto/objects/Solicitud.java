@@ -157,7 +157,11 @@ public class Solicitud {
         return solicitante.getDepartamento().getId();
     }
 
-    public String getSolicitante() {
+    public Profesor getSolicitante() {
+        return solicitante;
+    }
+
+    public String get_Solicitante() {
         return solicitante.getNombre().concat(" ")
                 .concat(solicitante.getApellidos());
     }
@@ -225,25 +229,9 @@ public class Solicitud {
 
         boolean com = ((comentario == null && solicitud.comentario == null) || comentario.equals(solicitud.comentario));
 
-        // boolean est = ((estado_comentario == null && solicitud.estado_comentario ==
-        // null)
-        // || estado_comentario.equals(solicitud.estado_comentario));
-
-        // List<Integer> participantes = participantesNombre.stream().map(s ->
-        // s.getId())
-        // .collect(Collectors.toList());
-
-        // List<Integer> responsables = responsablesNombre.stream().map(s ->
-        // s.getId()).collect(Collectors.toList());
-
-        // List<Integer> responsables = responsablesNombre.stream().map(s ->
-        // Integer.parseInt(s.split("-")[0]))
-        // .collect(Collectors.toList());
-
         List<Integer> transportes_id = new ArrayList<>();
 
         for (MediosTransporte s : transportes) {
-            // TransporteDAO transporteDAO = new TransporteDAO();
             transportes_id.add(s.getId());
         }
 

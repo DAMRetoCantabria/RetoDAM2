@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
 import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
 import javax.swing.text.PlainDocument;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
@@ -74,6 +76,8 @@ public class Solicitudes extends JPanel {
     private int estado;
     private Solicitud solicitud;
     private Programadas programada;
+    private JFormattedTextField precio;
+    private JTextField emp_transporte;
 
     public Solicitudes(int estado, Solicitud solicitud) {
         this.estado = estado;
@@ -84,7 +88,6 @@ public class Solicitudes extends JPanel {
     public Solicitudes(int estado, Programadas programada) {
         this.estado = estado;
         this.programada = programada;
-        System.out.println(programada);
         init();
     }
 
@@ -151,9 +154,12 @@ public class Solicitudes extends JPanel {
             if (departamentos.get(i).getId() == profesoresSQL.buscar(Login.user.getId()).getDepartamento().getId()
                     && estado == 1) {
                 index = i;
-            } else if (solicitud != null && programada != null) {
-                if (departamentos.get(i).getId() == solicitud.get_solicitante().getDepartamento().getId()
-                        && estado == 2) {
+            } else if (solicitud != null) {
+                if (departamentos.get(i).getId() == solicitud.getSolicitante().getId()) {
+                    index = i;
+                }
+            } else if (programada != null) {
+                if (departamentos.get(i).getId() == programada.getSolicitante().getId()) {
                     index = i;
                 }
             }
@@ -563,9 +569,27 @@ public class Solicitudes extends JPanel {
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
         panel.add(new JLabel("Empresa de transporte: "), "split 2");
         panel.add(new JLabel("Precio: "), "gapleft 290, wrap");
-        JTextField precio = new JTextField();
-        JTextField emp_transporte = new JTextField();
+        /*
+         * NumberFormat format = NumberFormat.getInstance();
+         * format.setMinimumFractionDigits(0);
+         * format.setMaximumFractionDigits(2);
+         * NumberFormatter formato = new NumberFormatter(format);
+         * formato.setValueClass(Double.class);
+         * formato.setMinimum(0.0);
+         * formato.setMaximum(99999.99);
+         * formato.setAllowsInvalid(false);
+         * formato.setCommitsOnValidEdit(true);
+         */
+        precio = new JFormattedTextField();
+        emp_transporte = new JTextField();
         setDocumentfilter(emp_transporte, 30);
+        setDocumentfilter(precio, 8);
+
+        if (estado == 3) {
+            emp_transporte.setText(programada.getEmpresa_transporte());
+            precio.setText(String.valueOf(programada.getPrecio_transporte()));
+        }
+
         panel.add(emp_transporte, "split 2, width 850, height 30!, align center");
         panel.add(precio, "gapleft 20, height 30!, align center, wrap");
         return panel;
@@ -573,56 +597,71 @@ public class Solicitudes extends JPanel {
 
     private void onAceptarClicked() {
         if (validaSolicitud()) {
-            creaSolicitud();
+            if (estado == 2) {
+                creaSolicitud();
+            } else if (estado == 3) {
+                creaProgramada();
+            }
+
         }
     }
 
     private boolean validaSolicitud() {
         if (departamento_desp.getSelectedIndex() < 0) {
-            System.out.println("Debes seleccionar un departamento");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un departamento.");
             return false;
         } else if (!titulo_field.getText().matches("^([A-Z0-9Ñ][a-záéíóúñºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
-            System.out.println("Debes introducir un titulo correcto.");
+            JOptionPane.showMessageDialog(null, "Debes introducir un titulo correcto.");
             return false;
         } else if (!tipo1_boton.isSelected() && !tipo2_boton.isSelected()) {
-            System.out.println("Debes seleccionar el tipo de actividad");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar el tipo de actividad.");
             return false;
         } else if (!selectHora1.isTimeSelected()) {
-            System.out.println("Debes introducir una hora de comienzo");
+            JOptionPane.showMessageDialog(null, "Debes introducir una hora de comienzo.");
             return false;
         } else if (!selectHora2.isTimeSelected()) {
-            System.out.println("Debes introducir una hora de fin");
+            JOptionPane.showMessageDialog(null, "Debes introducir una hora de fin.");
             return false;
         } else if (!selectFecha1.isDateSelected()) {
-            System.out.println("Debes introducir una fecha de comienzo");
+            JOptionPane.showMessageDialog(null, "Debes introducir una fecha de comienzo.");
             return false;
         } else if (!selectFecha2.isDateSelected()) {
-            System.out.println("Debes introducir una fecha de fin");
+            JOptionPane.showMessageDialog(null, "Debes introducir una fecha de fin.");
             return false;
         } else if (responsables_desp.getSelectedItems().isEmpty()) {
-            System.out.println("Debes seleccionar al menos un profesor responsable");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar al menos un profesor responsable.");
             return false;
         } else if (alumnos_desp.getSelectedItems().contains("Seleccione cursos o grupos")) {
-            System.out.println("Has seleccionado un item no válido.");
+            JOptionPane.showMessageDialog(null, "Has seleccionado un item no válido.");
             return false;
         } else if (alumnos_desp.getSelectedItems().isEmpty()) {
-            System.out.println("Debes seleccionar al menos un grupo o curso");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar al menos un grupo o curso.");
             return false;
         } else if (!observaciones_trans.getText().isEmpty()
                 && !observaciones_trans.getText().matches("^([A-Z0-9Ña-záéíóñúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
-            System.out.println("Debes introducir observaciones de transporte correctas.");
+            JOptionPane.showMessageDialog(null, "Debes introducir observaciones de transporte correctas.");
             return false;
         } else if (!alojamiento_si.isSelected() && !alojamiento_no.isSelected()) {
-            System.out.println("Debes seleccionar si se requiere alojamiento");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar si se requiere alojamiento.");
             return false;
         } else if (alojamiento_si.isSelected()
                 && !observaciones_aloj.getText().matches("^([A-Z0-9Ña-záéíñóúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
-            System.out.println("Debes introducir observaciones de alojamiento correctas.");
+            JOptionPane.showMessageDialog(null, "Debes introducir observaciones de alojamiento correctas.");
             return false;
         } else if (!observaciones.getText().isEmpty()
                 && !observaciones.getText().matches("^([A-Z0-9Ña-záéíóñúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
-            System.out.println("Debes introducir observaciones correctas.");
+            JOptionPane.showMessageDialog(null, "Debes introducir observaciones correctas.");
             return false;
+        } else if (estado == 3) {
+            if (emp_transporte.getText().matches("^([A-Z0-9Ña-záéíóñúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
+                JOptionPane.showMessageDialog(null, "Debes introducir una empresa de transporte.");
+                return false;
+            } else if (!precio.getText().matches("^\\d{1,5}(\\.\\d{1,2})?$")) {
+                JOptionPane.showMessageDialog(null, "Debes introducir un precio.");
+                return false;
+            } else {
+                return true;
+            }
         } else {
             return true;
         }
@@ -647,22 +686,6 @@ public class Solicitudes extends JPanel {
         ProfesorDAO profesorSQL = new ProfesorDAO();
         CursosDAO cursosSQL = new CursosDAO();
         GruposDAO gruposSQL = new GruposDAO();
-
-        // List<String> participantes = (List<String>)
-        // participantes_desp.getSelectedItems().stream().map(Object::toString)
-        // .collect(Collectors.toList());
-        // List<String> responsables = (List<String>)
-        // responsables_desp.getSelectedItems().stream().map(Object::toString)
-        // .collect(Collectors.toList());
-        // List<String> alumnos = (List<String>)
-        // alumnos_desp.getSelectedItems().stream().map(Object::toString)
-        // .collect(Collectors.toList());
-        // List<String> transportes = (List<String>)
-        // transporte_desp.getSelectedItems().stream().map(Object::toString)
-        // .collect(Collectors.toList());
-        // List<MediosTransporte> transportes =
-        // transporte_desp.getSelectedItems().stream()
-        // .map(obj -> (MediosTransporte) obj).collect(Collectors.toList());
 
         List<Profesor> participantes = participantes_desp.getSelectedItems().stream()
                 .map(nombre -> (Profesor) profesorSQL.buscar(Integer.parseInt(String.valueOf(nombre).split("-")[0])))
@@ -720,12 +743,8 @@ public class Solicitudes extends JPanel {
                     null, transportes, participantes, responsables, cursos, grupos);
             id = solicitudSQL.guardar(solicitud);
         }
-        /*
-         * if (cambio != true) {
-         * JOptionPane.showMessageDialog(null,
-         * "No ha realizado cambios en la solicitud.");
-         * } else
-         */if (cambio == true) {
+
+        if (cambio == true) {
 
             for (Profesor responsable : responsables) {
                 int id_responsable = responsable.getId();
@@ -747,6 +766,107 @@ public class Solicitudes extends JPanel {
             for (MediosTransporte transporte : transportes) {
                 int id_transporte = transporte.getId();
                 solicitudSQL.guardarTransporte(id, id_transporte);
+            }
+            JOptionPane.showMessageDialog(null, "Cambios realizados con éxito.");
+            VentanaSingleton.getInstance().cerrarVentana("Crear Solicitud");
+        }
+    }
+
+    private void creaProgramada() {
+        ProgramadasDAO programadaSQL = new ProgramadasDAO();
+        boolean cambio = true;
+        String titulo = titulo_field.getText();
+        TipoActividad tipo = TipoActividad.valueOf(tipo1_boton.isSelected() ? "Extraescolar" : "Complementaria");
+        boolean prevista = prevista_toggle.isSelected();
+        LocalDate fini = selectFecha1.getSelectedDate();
+        LocalDate ffin = selectFecha2.getSelectedDate();
+        LocalTime hini = selectHora1.getSelectedTime();
+        LocalTime hfin = selectHora2.getSelectedTime();
+        boolean transporte_req = transporte_desp.getSelectedItems().isEmpty() ? false : true;
+        String transporte_com = observaciones_trans.getText().isEmpty() ? null : observaciones_trans.getText();
+        boolean alojam_req = alojamiento_si.isSelected();
+        String alojam_com = observaciones_aloj.getText().isEmpty() ? null : observaciones_aloj.getText();
+        String comentarios = observaciones.getText().isEmpty() ? null : observaciones.getText();
+        String empresa_transporte = emp_transporte.getText();
+        double precio_transporte = Double.parseDouble(precio.getText());
+        TransporteDAO transporteSQL = new TransporteDAO();
+        ProfesorDAO profesorSQL = new ProfesorDAO();
+        CursosDAO cursosSQL = new CursosDAO();
+        GruposDAO gruposSQL = new GruposDAO();
+
+        List<Profesor> participantes = participantes_desp.getSelectedItems().stream()
+                .map(nombre -> (Profesor) profesorSQL.buscar(Integer.parseInt(String.valueOf(nombre).split("-")[0])))
+                .collect(Collectors.toList());
+
+        List<Profesor> responsables = responsables_desp.getSelectedItems().stream()
+                .map(nombre -> (Profesor) profesorSQL.buscar(Integer.parseInt(String.valueOf(nombre).split("-")[0])))
+                .collect(Collectors.toList());
+
+        List<MediosTransporte> transportes = transporte_desp.getSelectedItems().stream()
+                .map(nombre -> (MediosTransporte) transporteSQL
+                        .buscar(String.valueOf(nombre)))
+                .collect(Collectors.toList());
+
+        List<Curso> cursos = new ArrayList<>();
+
+        List<Grupo> grupos = new ArrayList<>();
+
+        if (cursos_boton.isSelected()) {
+            cursos = alumnos_desp.getSelectedItems().stream()
+                    .map(nombre -> (Curso) cursosSQL.buscar(String.valueOf(nombre)))
+                    .collect(Collectors.toList());
+        } else {
+            grupos = alumnos_desp.getSelectedItems().stream()
+                    .map(nombre -> (Grupo) gruposSQL.buscar(String.valueOf(nombre)))
+                    .collect(Collectors.toList());
+        }
+
+        int id = 0;
+        if (estado == 3) {
+            id = programada.getId_programada();
+            Profesor solicitante = profesorSQL.buscar(Login.user.getId());
+
+            Programadas newprogramada = new Programadas(id, programada.getSolicitada(), solicitante, titulo, tipo, fini,
+                    ffin, hini, hfin, prevista,
+                    transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
+                    programada.getEstado_comentario(), empresa_transporte, precio_transporte, transportes,
+                    participantes, responsables, cursos, grupos);
+
+            if (newprogramada.equals(programada, participantes, responsables, transportes, cursos, grupos,
+                    cursos_boton.isSelected() ? true : false)) {
+                cambio = false;
+                return;
+            } else {
+                programadaSQL.borraCursos(id);
+                programadaSQL.borraGrupos(id);
+                programadaSQL.borraParticipantes(id);
+                programadaSQL.borraResponsables(id);
+                programadaSQL.borraTransportes(id);
+                programadaSQL.guardar(newprogramada);
+            }
+        }
+        if (cambio == true) {
+
+            for (Profesor responsable : responsables) {
+                int id_responsable = responsable.getId();
+                programadaSQL.guardarResponsable(id, id_responsable);
+            }
+            for (Profesor participante : participantes) {
+                int id_participante = participante.getId();
+                programadaSQL.guardarParticipante(id, id_participante);
+            }
+            if (cursos_boton.isSelected()) {
+                for (Curso curso : cursos) {
+                    programadaSQL.guardarCurso(id, curso.getId());
+                }
+            } else {
+                for (Grupo grupo : grupos) {
+                    programadaSQL.guardarGrupo(id, grupo.getId());
+                }
+            }
+            for (MediosTransporte transporte : transportes) {
+                int id_transporte = transporte.getId();
+                programadaSQL.guardarTransporte(id, id_transporte);
             }
             JOptionPane.showMessageDialog(null, "Cambios realizados con éxito.");
             VentanaSingleton.getInstance().cerrarVentana("Crear Solicitud");

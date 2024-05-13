@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -24,6 +25,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import reto.utilidades.*;
@@ -118,7 +121,7 @@ public class Gestionar extends JPanel {
                 if (!event.getValueIsAdjusting()) {
                     int viewRow = table.getSelectedRow();
                     if (viewRow < 0) {
-                        // La selección está vacía
+
                     } else {
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         int id = Integer.parseInt(model.getValueAt(viewRow, 0).toString());
@@ -153,6 +156,16 @@ public class Gestionar extends JPanel {
         }
 
         table.setModel(model);
+
+        TableRowSorter<TableModel> organizador = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(organizador);
+
+        organizador.setComparator(0, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o1, o2);
+            }
+        });
 
         datosSolicitadas();
     }
