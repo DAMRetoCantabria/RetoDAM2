@@ -30,7 +30,7 @@
 
 ---
 
-# 1. BASE DE DATOS
+# 1. BASE DE DATOS <a name="base-de-datos"></a>
   ### Descripcion de la base de datos. 
    
   #### 1. Tabla Profesores
@@ -106,21 +106,21 @@
     Clave primaria: id, programadas_id_programada
 
 
-  ### Imagen de E/R.
+  ### Imagen de E/R. <a name="diagramaE/R"></a>
 
 ![Diagrama Entidad Relación](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/EsquemaER.png)
 
-  ### Diagrama relacional
+  ### Diagrama relacional <a name="diagramaR"></a>
 
 ![Diagrama Relacional](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/EsquemaRelacional.png)
 
   ### Archivo de importacion SQL 
 
-[Script importacion BD](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base de Datos/DBReto.sql)
+[Script importacion BD](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base%20de%20Datos/DBReto.sql)
 
-[Script importacion BD con datos de prueba](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base de Datos/DBTest.sql)
+[Script importacion BD con datos de prueba](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base%20de%20Datos/DBTest.sql)
 
-# 2. SERVIDORES
+# 2. SERVIDORES <a name="servidores"></a>
 
   ## SERVIDOR BASE DE DATOS MARIADB
 
@@ -135,7 +135,7 @@
     Seguridad: MariaDB incluye características de seguridad robustas, como cifrado de datos en reposo y en tránsito, autenticación avanzada y control de acceso granular. Esto es fundamental para proteger la información sensible de los estudiantes y el personal.
 
 
-  En el contexto de nuestra aplicación, hemos configurado el servidor MariaDB en una máquina virtual Alpine Linux mediante un contenedor Docker. El servidor está escuchando en el puerto 3306. Para acceder a él, utilizamos las credenciales de **desarrollo** y contraseña **retacantabria24**. Este enfoque nos permite gestionar eficientemente la base de datos y garantizar la seguridad de nuestras operaciones.
+  En el contexto de nuestra aplicación, hemos configurado el servidor MariaDB en una máquina virtual Alpine Linux mediante un contenedor Docker. El servidor está escuchando en el puerto **3306**. Para acceder a él, utilizamos las credenciales de **desarrollo** y contraseña **retacantabria24**. Este enfoque nos permite gestionar eficientemente la base de datos y garantizar la seguridad de nuestras operaciones.
 
   
   ## SERVIDOR WEB NGINX
@@ -152,6 +152,7 @@
 
     Escalabilidad: Docker permite escalar horizontalmente los contenedores Nginx según las necesidades de tráfico.  
 
+  El servidor Nginx se encuentra escuchando el puerto **8080**. Para facilitara la transferencia de archivos al servidor web se ha instalado un servidor SFTP que escucha el puerto **2222** y utilizará las credenciales **reto** y contraseña **retacantabria**.  
   Contenedor Docker SFTP para el Servidor FTP:
 
     ¿Qué es SFTP? SFTP es un servidor SFTP (SSH File Transfer Protocol) basado en OpenSSH. Proporciona una forma segura de compartir archivos a través de conexiones cifradas.
