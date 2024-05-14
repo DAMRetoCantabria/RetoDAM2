@@ -167,7 +167,7 @@
 
 En resumen, la elección de estos contenedores proporciona una infraestructura flexible, segura y escalable para la aplicación.
 
-# 3. WEB
+# 3. WEB <a name="web"></a>
 
 ### Representación Directa de Información:
 
@@ -589,7 +589,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 ```
 </details>
 
-# 4.- APLICACION
+# 4.- APLICACION <a name="aplicacion"></a>
 
   ### Diagrama de clases
 
@@ -597,13 +597,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   ### Javadoc
 
+  [Documentacion Javadoc](https://raw.githack.com/DAMRetoCantabria/RetoDAM2/Documentaci%C3%B3n/App/acex/target/site/apidocs/index.html)
+
   ### Cursos/Grupos y numero de alumnos
 
-    Optamos por modelar una relación entre cursos y grupos, donde cada grupo tiene un atributo que indica a qué curso pertenece. Esta estructura jerárquica nos permite organizar los grupos de manera lógica y facilita la gestión de los alumnos. La relación curso-grupo refleja la estructura real de la organización educativa y ayuda a los usuarios a comprender la jerarquía. Los grupos se asocian directamente con un curso específico, lo que simplifica la administración y búsqueda.
-
-    Decidimos asignar el número de alumnos solo a los grupos, ya que los cursos están formados por varios grupos. El número de alumnos en un curso es simplemente la suma de los alumnos en sus grupos asociados. Al calcular el total de alumnos a nivel de curso, evitamos duplicar información y reducimos la carga de mantenimiento. La coherencia entre los datos de grupos y cursos garantiza que siempre tengamos una visión precisa del número total de alumnos.
+  > Optamos por modelar una relación entre cursos y grupos, donde cada grupo tiene un atributo que indica a qué curso pertenece. Esta estructura jerárquica nos permite organizar los grupos de manera lógica y facilita la gestión de los alumnos. La relación curso-grupo refleja la estructura real de la organización educativa y ayuda a los usuarios a comprender la jerarquía. Los grupos se asocian directamente con un curso específico, lo que simplifica la administración y búsqueda.
+  > 
+  > Decidimos asignar el número de alumnos solo a los grupos, ya que los cursos están formados por varios grupos. El número de alumnos en un curso es simplemente la suma de los alumnos en sus grupos asociados. Al calcular el total de alumnos a nivel de curso, evitamos duplicar información y reducimos la carga de mantenimiento. La coherencia entre los datos de grupos y cursos garantiza que siempre tengamos una visión precisa del número total de alumnos.
 
   ### Funcionalidad
 
 
-# 5.- CONCLUSIONES
+# 5.- CONCLUSIONES <a name="conclusiones"></a>
