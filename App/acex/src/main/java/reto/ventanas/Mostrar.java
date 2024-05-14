@@ -669,20 +669,20 @@ public class Mostrar extends JPanel {
             activoValue = activoRadio1.isSelected() ? "1" : "0";
             return true;
         } else {
-            System.out.println("Activo no valido");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar si está activo.");
             return false;
         }
     }
 
     private boolean validaDepartamento(String codigo, String nombre, String jefe) {
         if (!codigo.matches("^[A-Z]{2,}$")) {
-            System.out.println("Codigo no valido");
+            JOptionPane.showMessageDialog(null, "Código no válido.");
             return false;
         } else if (!nombre.matches("^([A-Z][a-záéíóú]*)(\\s[A-Za-záéíóú]*)*$")) {
-            System.out.println("Nombre no valido");
+            JOptionPane.showMessageDialog(null, "Nombre no válido.");
             return false;
         } else if (jefe == null) {
-            System.out.println("Jefe no valido");
+            JOptionPane.showMessageDialog(null, "Jefe no válido.");
             return false;
         }
         return true;
@@ -691,13 +691,13 @@ public class Mostrar extends JPanel {
     private boolean validaCurso(String codigo, String descripcion, String etapa) {
         if (validaActivo()) {
             if (!codigo.matches("^[A-Z0-9]+$")) {
-                System.out.println("Codigo no valido");
+                JOptionPane.showMessageDialog(null, "Código no válido.");
                 return false;
             } else if (!descripcion.matches("^([A-Z][a-záéíóú]*)(\\s[A-Za-záéíóú]*)*$")) {
-                System.out.println("Descripcion no valida");
+                JOptionPane.showMessageDialog(null, "Descripción no válida.");
                 return false;
             } else if (etapa == null) {
-                System.out.println("Etapa no valida");
+                JOptionPane.showMessageDialog(null, "Etapa no válida.");
                 return false;
             }
             return true;
@@ -709,13 +709,13 @@ public class Mostrar extends JPanel {
     private boolean validaGrupo(String codigo, String alumnos, String curso) {
         if (validaActivo()) {
             if (!codigo.matches("^[A-Z0-9]+$")) {
-                System.out.println("Codigo no valido");
+                JOptionPane.showMessageDialog(null, "Código no válido.");
                 return false;
             } else if (!alumnos.matches("^[0-9]{1,2}$")) {
-                System.out.println("Numero de alumnos no valido");
+                JOptionPane.showMessageDialog(null, "Numero de alumnos no válido.");
                 return false;
             } else if (curso == null) {
-                System.out.println("Curso no valido");
+                JOptionPane.showMessageDialog(null, "Curso no válido.");
                 return false;
             }
             return true;
@@ -728,22 +728,22 @@ public class Mostrar extends JPanel {
             String departamento) {
         if (validaActivo()) {
             if (!dni.matches("^[0-9]{8}[A-Z]{1}$") || !Utils.validarDNI(dni)) {
-                System.out.println("DNI no valido");
+                JOptionPane.showMessageDialog(null, "DNI no válido.");
                 return false;
             } else if (!nombre.matches("^([A-Z][a-záéíóú]*)(\\s[A-Z][a-záéíóú]*)?$")) {
-                System.out.println("Nombre no valido");
+                JOptionPane.showMessageDialog(null, "Nombre no válido.");
                 return false;
             } else if (!apellidos.matches("^([A-Z][a-záéíóú]*)(\\s[A-Z][a-záéíóú]*)*$")) {
-                System.out.println("Apellidos no validos ");
+                JOptionPane.showMessageDialog(null, "Apellidos no válidos.");
                 return false;
             } else if (!correo.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
-                System.out.println("Correo no valido");
+                JOptionPane.showMessageDialog(null, "Correo no válido.");
                 return false;
             } else if (nivel == null) {
-                System.out.println("Nivel no valido");
+                JOptionPane.showMessageDialog(null, "Nivel no válido.");
                 return false;
             } else if (departamento == null) {
-                System.out.println("Departamento no valido");
+                JOptionPane.showMessageDialog(null, "Departamento no válido.");
                 return false;
             }
             return true;

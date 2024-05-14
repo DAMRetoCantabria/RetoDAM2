@@ -477,7 +477,7 @@ public class SolicitudDAO implements RepositorioSolicitud<Solicitud> {
                 rs.getString("titulo"),
                 rs.getString("tipo") == "extraescolar" ? TipoActividad.Extraescolar : TipoActividad.Complementaria,
                 rs.getDate("fini").toLocalDate(), rs.getDate("ffin").toLocalDate(), rs.getTime("hini").toLocalTime(),
-                rs.getTime("hfin").toLocalTime(), rs.getBoolean("prevista"),
+                rs.getTime("hfin").toLocalTime(), rs.getBoolean("prevista"), rs.getInt("nalumnos_ausentes"), 
                 rs.getBoolean("transporte_req"), rs.getString("coment_transporte"), rs.getBoolean("alojamiento_req"),
                 rs.getString("coment_alojamiento"),
                 rs.getString("comentarios"),

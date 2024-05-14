@@ -21,6 +21,7 @@ public class Solicitud {
     private LocalTime hini;
     private LocalTime hfin;
     private boolean previsto;
+    private int nalumnos_ausentes;
     private boolean transp_requerido;
     private String transp_comentario;
     private boolean aloj_requerido;
@@ -53,6 +54,7 @@ public class Solicitud {
      * @param hini              la hora de inicio
      * @param hfin              la hora de fin
      * @param previsto          indica si la actividad está prevista
+     * @param nalumnos_ausentes el número de alumnos ausentes
      * @param transp_requerido  indica si se requiere transporte
      * @param transp_comentario el comentario sobre el transporte
      * @param aloj_requerido    indica si se requiere alojamiento
@@ -67,7 +69,7 @@ public class Solicitud {
      * @param grupos            la lista de grupos
      */
     public Solicitud(int id_solicitud, Profesor solicitante, String titulo, TipoActividad tipo,
-            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, boolean transp_requerido,
+            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, int nalumnos_ausentes, boolean transp_requerido,
             String transp_comentario, boolean aloj_requerido, String aloj_comentario, String comentario,
             EstadoActividad estado, String estado_comentario, List<MediosTransporte> transportes,
             List<Profesor> participantes, List<Profesor> responsables, List<Curso> cursos, List<Grupo> grupos) {
@@ -80,6 +82,7 @@ public class Solicitud {
         this.hini = hini;
         this.hfin = hfin;
         this.previsto = previsto;
+        this.nalumnos_ausentes = nalumnos_ausentes;
         this.transp_requerido = transp_requerido;
         this.transp_comentario = transp_comentario;
         this.aloj_requerido = aloj_requerido;
@@ -105,6 +108,7 @@ public class Solicitud {
      * @param hini              la hora de inicio
      * @param hfin              la hora de fin
      * @param previsto          indica si la actividad está prevista
+     * @param nalumnos_ausentes el número de alumnos ausentes
      * @param transp_requerido  indica si se requiere transporte
      * @param transp_comentario el comentario sobre el transporte
      * @param aloj_requerido    indica si se requiere alojamiento
@@ -119,7 +123,7 @@ public class Solicitud {
      * @param grupos            la lista de grupos
      */
     public Solicitud(Profesor solicitante, String titulo, TipoActividad tipo,
-            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, boolean transp_requerido,
+            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, int nalumnos_ausentes, boolean transp_requerido,
             String transp_comentario,
             boolean aloj_requerido, String aloj_comentario, String comentario,
             EstadoActividad estado, String estado_comentario, List<MediosTransporte> transportes,
@@ -132,6 +136,7 @@ public class Solicitud {
         this.hini = hini;
         this.hfin = hfin;
         this.previsto = previsto;
+        this.nalumnos_ausentes = nalumnos_ausentes;
         this.transp_requerido = transp_requerido;
         this.transp_comentario = transp_comentario;
         this.aloj_requerido = aloj_requerido;
@@ -353,7 +358,7 @@ public class Solicitud {
             }
         }
 
-        return numAlumnos;
+        return numAlumnos - nalumnos_ausentes;
     }
 
     /**
@@ -399,6 +404,15 @@ public class Solicitud {
      */
     public List<Grupo> getGrupos() {
         return grupos;
+    }
+
+    /**
+     * Obtiene el número de alumnos ausentes.
+     * 
+     * @return el número de alumnos ausentes
+     */
+    public int getAlumnos_ausentes() {
+        return nalumnos_ausentes;
     }
 
     /**

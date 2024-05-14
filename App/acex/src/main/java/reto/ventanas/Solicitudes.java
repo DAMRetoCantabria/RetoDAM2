@@ -79,6 +79,8 @@ public class Solicitudes extends JPanel {
     private Programadas programada;
     private JFormattedTextField precio;
     private JTextField emp_transporte;
+    private JLabel alumnos_ausentes;
+    private JTextField nalumnos_ausentes;
 
     /**
      * Constructor de la clase Solicitudes.
@@ -414,6 +416,9 @@ public class Solicitudes extends JPanel {
         alumnos_desp = new Multiseleccion<>();
         alumnos_desp.addItem("Seleccione cursos o grupos");
 
+        alumnos_ausentes = new JLabel("Alumnos ausentes: ");
+        nalumnos_ausentes = new JTextField();
+
         cursos_boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -462,6 +467,7 @@ public class Solicitudes extends JPanel {
                 }
             }
             alumnos_desp.setSelectedItems(alumnos2);
+            nalumnos_ausentes.setText(String.valueOf(solicitud.getAlumnos_ausentes()));
         } else if (estado == 3) {
             ProgramadasDAO programadasSQL = new ProgramadasDAO();
             List<Curso> cursos = new ArrayList<>();
@@ -493,7 +499,9 @@ public class Solicitudes extends JPanel {
         panel.add(alumnos);
         panel.add(grupos_boton, "gapleft 20");
         panel.add(cursos_boton, "wrap");
-        panel.add(alumnos_desp, "width 100%, span 3, wrap");
+        panel.add(alumnos_desp, "width 100%, span 2");
+        panel.add(alumnos_ausentes, "split 2");
+        panel.add(nalumnos_ausentes, "width 30%, span 2, wrap");
         return panel;
     }
 
@@ -814,6 +822,7 @@ public class Solicitudes extends JPanel {
         LocalDate ffin = selectFecha2.getSelectedDate();
         LocalTime hini = selectHora1.getSelectedTime();
         LocalTime hfin = selectHora2.getSelectedTime();
+        int n_ausentes = nalumnos_ausentes.getText().isEmpty() ? 0 : Integer.parseInt(nalumnos_ausentes.getText());
         boolean transporte_req = transporte_desp.getSelectedItems().isEmpty() ? false : true;
         String transporte_com = observaciones_trans.getText().isEmpty() ? null : observaciones_trans.getText();
         boolean alojam_req = alojamiento_si.isSelected();
@@ -856,7 +865,7 @@ public class Solicitudes extends JPanel {
             id = solicitud.getId_solicitud();
             Profesor solicitante = profesorSQL.buscar(Login.user.getId());
 
-            Solicitud solicitud = new Solicitud(id, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista,
+            Solicitud solicitud = new Solicitud(id, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, n_ausentes,
                     transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
                     null, transportes, participantes, responsables, cursos, grupos);
 
@@ -875,7 +884,7 @@ public class Solicitudes extends JPanel {
         } else {
             Profesor solicitante = profesorSQL.buscar(Login.user.getId());
 
-            Solicitud solicitud = new Solicitud(solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista,
+            Solicitud solicitud = new Solicitud(solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, n_ausentes,
                     transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
                     null, transportes, participantes, responsables, cursos, grupos);
             id = solicitudSQL.guardar(solicitud);
