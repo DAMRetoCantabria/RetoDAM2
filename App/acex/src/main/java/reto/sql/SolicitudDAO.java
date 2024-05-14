@@ -67,9 +67,9 @@ public class SolicitudDAO implements RepositorioSolicitud<Solicitud> {
     public int guardar(Solicitud solicitud) {
         String sql = null;
         if (solicitud.getId_solicitud() > 0) {
-            sql = "UPDATE actividades SET solicitante=?,titulo=?, tipo=?, fini=?, ffin=?, hini=?, hfin=?, prevista=?, transporte_req=?, coment_transporte=?, alojamiento_req=?, coment_alojamiento=?, comentarios=?, estado=?, coment_estado=? WHERE id_actividad=?";
+            sql = "UPDATE actividades SET solicitante=?,titulo=?, tipo=?, fini=?, ffin=?, hini=?, hfin=?, prevista=?, nalumnos_ausentes=?, transporte_req=?, coment_transporte=?, alojamiento_req=?, coment_alojamiento=?, comentarios=?, estado=?, coment_estado=? WHERE id_actividad=?";
         } else {
-            sql = "INSERT INTO actividades(solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, transporte_req, coment_transporte, alojamiento_req, coment_alojamiento, comentarios, estado, coment_estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO actividades(solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, nalumnos_ausentes, transporte_req, coment_transporte, alojamiento_req, coment_alojamiento, comentarios, estado, coment_estado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         }
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             if (solicitud.getId_solicitud() > 0) {
@@ -83,13 +83,14 @@ public class SolicitudDAO implements RepositorioSolicitud<Solicitud> {
             stmt.setTime(6, java.sql.Time.valueOf(solicitud.getHini()));
             stmt.setTime(7, java.sql.Time.valueOf(solicitud.getHfin()));
             stmt.setString(8, solicitud.isPrevisto() ? "1" : "0");
-            stmt.setString(9, solicitud.isTransp_requerido() ? "1" : "0");
-            stmt.setString(10, solicitud.getTransp_comentario());
-            stmt.setString(11, solicitud.isAloj_requerido() ? "1" : "0");
-            stmt.setString(12, solicitud.getAloj_comentario());
-            stmt.setString(13, solicitud.getComentario());
-            stmt.setString(14, solicitud.getEstado().toString());
-            stmt.setString(15, solicitud.getEstado_comentario());
+            stmt.setInt(9, solicitud.getAlumnos_ausentes());
+            stmt.setString(10, solicitud.isTransp_requerido() ? "1" : "0");
+            stmt.setString(11, solicitud.getTransp_comentario());
+            stmt.setString(12, solicitud.isAloj_requerido() ? "1" : "0");
+            stmt.setString(13, solicitud.getAloj_comentario());
+            stmt.setString(14, solicitud.getComentario());
+            stmt.setString(15, solicitud.getEstado().toString());
+            stmt.setString(16, solicitud.getEstado_comentario());
 
             int salida = stmt.executeUpdate();
             if (salida != 1) {

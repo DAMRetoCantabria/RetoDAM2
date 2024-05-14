@@ -267,7 +267,8 @@ public class Gestionar extends JPanel {
             } else {
                 tipo2.setSelected(true);
             }
-            solicitante_text.setText(String.valueOf(solicitud.getSolicitante()));
+            solicitante_text.setText(String.valueOf(solicitud.getSolicitante().getNombre() + " "
+                    + solicitud.getSolicitante().getApellidos()));
             prevista_toggle.setSelected(solicitud.isPrevisto());
             titulo_text.setText(solicitud.getTitulo());
 

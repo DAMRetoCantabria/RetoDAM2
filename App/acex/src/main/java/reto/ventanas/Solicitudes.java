@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -81,6 +83,9 @@ public class Solicitudes extends JPanel {
     private JTextField emp_transporte;
     private JLabel alumnos_ausentes;
     private JTextField nalumnos_ausentes;
+    private JLabel alumnos_totales;
+    private JTextField nalumnos_totales;
+    private int nalu;
 
     /**
      * Constructor de la clase Solicitudes.
@@ -183,11 +188,11 @@ public class Solicitudes extends JPanel {
                     && estado == 1) {
                 index = i;
             } else if (solicitud != null) {
-                if (departamentos.get(i).getId() == solicitud.getSolicitante().getId()) {
+                if (departamentos.get(i).getId() == solicitud.getSolicitante().getDepartamento().getId()) {
                     index = i;
                 }
             } else if (programada != null) {
-                if (departamentos.get(i).getId() == programada.getSolicitante().getId()) {
+                if (departamentos.get(i).getId() == programada.getSolicitante().getDepartamento().getId()) {
                     index = i;
                 }
             }
@@ -416,6 +421,10 @@ public class Solicitudes extends JPanel {
         alumnos_desp = new Multiseleccion<>();
         alumnos_desp.addItem("Seleccione cursos o grupos");
 
+        alumnos_totales = new JLabel("Alumnos totales: ");
+        nalumnos_totales = new JTextField();
+        nalumnos_totales.setEditable(false);
+
         alumnos_ausentes = new JLabel("Alumnos ausentes: ");
         nalumnos_ausentes = new JTextField();
 
@@ -492,14 +501,29 @@ public class Solicitudes extends JPanel {
             alumnos_desp.setSelectedItems(alumnos2);
         }
 
+        alumnos_desp.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    CursosDAO cursoSQL = new CursosDAO();
+                    List<Curso> cursos = alumnos_desp.getSelectedItems().forEach(nalu += (cursoSQL.buscar((String) e.getItem()).getNumAlumnos()));
+                    // int totalAlumnos = obtenerTotalAlumnosParaGrupoCurso((String) e.getItem());
+        
+                    nalumnos_totales.setText(String.valueOf("17"));
+                }
+            }
+        });
+
         ButtonGroup group = new ButtonGroup();
         group.add(cursos_boton);
         group.add(grupos_boton);
 
         panel.add(alumnos);
         panel.add(grupos_boton, "gapleft 20");
-        panel.add(cursos_boton, "wrap");
-        panel.add(alumnos_desp, "width 100%, span 2");
+        panel.add(cursos_boton, "gapright 20");
+        panel.add(alumnos_totales, "split 2");
+        panel.add(nalumnos_totales, "width 30%, wrap");
+        panel.add(alumnos_desp, "width 100%, gapright 20, span 3");
         panel.add(alumnos_ausentes, "split 2");
         panel.add(nalumnos_ausentes, "width 30%, span 2, wrap");
         return panel;
@@ -725,7 +749,9 @@ public class Solicitudes extends JPanel {
      */
     private void onAceptarClicked() {
         if (validaSolicitud()) {
-            if (estado == 2) {
+            System.out.println(estado);
+            if (estado == 2 || estado == 1) {
+                System.out.println("Click crear solicitud");
                 creaSolicitud();
             } else if (estado == 3) {
                 creaProgramada();
@@ -798,6 +824,8 @@ public class Solicitudes extends JPanel {
                 return true;
             }
         } else {
+            System.out.println(estado);
+            System.out.println("Todo ok");
             return true;
         }
     }
@@ -813,6 +841,7 @@ public class Solicitudes extends JPanel {
      * de datos y cierra la ventana.
      */
     private void creaSolicitud() {
+        System.out.println("Creando solicitud");
         SolicitudDAO solicitudSQL = new SolicitudDAO();
         boolean cambio = true;
         String titulo = titulo_field.getText();
@@ -832,6 +861,8 @@ public class Solicitudes extends JPanel {
         ProfesorDAO profesorSQL = new ProfesorDAO();
         CursosDAO cursosSQL = new CursosDAO();
         GruposDAO gruposSQL = new GruposDAO();
+
+        System.out.println(n_ausentes);
 
         List<Profesor> participantes = participantes_desp.getSelectedItems().stream()
                 .map(nombre -> (Profesor) profesorSQL.buscar(Integer.parseInt(String.valueOf(nombre).split("-")[0])))
