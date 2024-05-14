@@ -505,9 +505,14 @@ public class Solicitudes extends JPanel {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    CursosDAO cursoSQL = new CursosDAO();
-                    List<Curso> cursos = alumnos_desp.getSelectedItems().forEach(nalu += (cursoSQL.buscar((String) e.getItem()).getNumAlumnos()));
+                    List<Object> cursos = alumnos_desp.getSelectedItems();
                     // int totalAlumnos = obtenerTotalAlumnosParaGrupoCurso((String) e.getItem());
+                    for (Object curso : cursos) {
+                        Curso c = (Curso) curso;
+                        nalu += (c.getNumAlumnos());
+                        //.forEach(nalu += 
+                        
+                    }
         
                     nalumnos_totales.setText(String.valueOf("17"));
                 }
