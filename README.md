@@ -25,7 +25,7 @@
   * Cursos/Grupos y numero de alumnos
   * Funcionalidad
 
-[5. Conclusiones](#conclusiones)  
+[5. Software utilizado](#software)  
 
 
 ---
@@ -608,4 +608,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
   ### Funcionalidad
 
 
-# 5.- CONCLUSIONES <a name="conclusiones"></a>
+# 5.- SOFTWARE UTILIZADO <a name="software"></a>
+
+
+| Software | Uso |
+| --------- | --------- |
+| VirtualBox    | Virtualización    |
+| Docker    | Despliegue de servicios    |
+| Alpine Linux    | SO    |
+| MariaDB  |  Sistema de gestion de BD  |
+| OpenSSH  |  Comunicacion cifrada en red  |
+| SFTP  |  Transferencia archivos con SSH  |
+| MySQL Workbench  |  Gestion, edicion, creación de BD  |
+| Putty |  Conexion con terminal remota a MV  |
+| Filezilla  |  Cliente FTP para transferencia de archivos  |
+| DIA  |  Diagramas  |
+| Draw.io  |  Diagramas  | 
+| LibreOffice Base  |  Informes de BD  |
+| NetBeans  | Programación java, documentación Javadoc |
+| VSCode  |  Programación java y html. Documentación Markdown |
+| InteliJ  |  Programación java |
+| Microsoft Word  |  Documentación  |
+| Adobe Illustrator  |  Logo e iconos  |
+| Adobe Photoshop  | Edición de imágenes  |
+| ConfyUI  |  Creación de imágenes con IA con Stable Diffusion |
+| Adobe InDesign  |  Documentación  |
