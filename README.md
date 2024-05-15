@@ -595,6 +595,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 ![Diagrama de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/UML.png)
 
+  ### Casos de uso  
+
+![Diagrama de casos de uso](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/CasosUso.png)
+
   ### Javadoc
 
   [Documentacion Javadoc](https://raw.githack.com/DAMRetoCantabria/RetoDAM2/Documentaci%C3%B3n/App/acex/target/site/apidocs/index.html)
@@ -603,9 +607,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   > Optamos por modelar una relación entre cursos y grupos, donde cada grupo tiene un atributo que indica a qué curso pertenece. Esta estructura jerárquica nos permite organizar los grupos de manera lógica y facilita la gestión de los alumnos. La relación curso-grupo refleja la estructura real de la organización educativa y ayuda a los usuarios a comprender la jerarquía. Los grupos se asocian directamente con un curso específico, lo que simplifica la administración y búsqueda.
   > 
-  > Decidimos asignar el número de alumnos solo a los grupos, ya que los cursos están formados por varios grupos. El número de alumnos en un curso es simplemente la suma de los alumnos en sus grupos asociados. Al calcular el total de alumnos a nivel de curso, evitamos duplicar información y reducimos la carga de mantenimiento. La coherencia entre los datos de grupos y cursos garantiza que siempre tengamos una visión precisa del número total de alumnos.
+  > A la hora de introducir las solicitudes se perdirá el numero de alumnos ausentes a la actividad. En cualquier momento durante el proceso de solicitud, gestión y organización se puede editar es dato y podremos ver en tiempo real el numero total de alumnos. 
+  >
+  > Decidimos asignar el número de alumnos solo a los grupos, ya que los cursos están formados por varios grupos. El número de alumnos en un curso es simplemente la suma de los alumnos en sus grupos asociados. Al calcular el total de alumnos a nivel de curso, evitamos duplicar información y reducimos la carga de mantenimiento. La coherencia entre los datos de grupos y cursos, ademas del factor de corrección de los alumnos ausentes garantiza que siempre tengamos una visión precisa del número total de alumnos.
 
   ### Funcionalidad
+
+  **Carga de datos**  
+  1.  Selección de Archivo CSV: Al hacer clic en el icono con forma de diskette, se abrirá una ventana de exploración de archivos. Aquí, los usuarios deben seleccionar el archivo CSV que contiene los datos de los profesores que desean cargar.
+  2.  Visualización del Archivo Seleccionado: Una vez seleccionado el archivo, su nombre se mostrará en el espacio indicado por (archivo.csv), confirmando que el tipo de archivo es correcto.
+  3.  Proceso de Actualización: Al presionar el botón “Actualizar”, la aplicación intentará cargar los datos del archivo CSV. Si no se ha seleccionado ningún archivo o el archivo es inválido, se mostrará un mensaje de error alertando al usuario.
+  4.  Resultados de la Carga: Si el archivo es válido y los datos se cargan correctamente, la aplicación informará al usuario sobre el número de datos actualizados y el número de nuevos datos que se han añadido a la base de datos.  
+
+  ![Carga de Datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/carga.png)  
+
+  **Gestion de datos**
+  1. Edición de Datos: Para editar la información de un registro existente, simplemente seleccione la fila correspondiente y realice uno de los siguientes pasos:  
+      -Doble clic sobre la fila seleccionada.  
+      -Haga clic en el botón “Editar”. Esto abrirá una nueva ventana donde podrá modificar los datos necesarios.
+  2. Añadir Nuevos Datos: Para introducir nuevos datos en el sistema, haga clic en el botón “Crear”. Se abrirá la misma ventana de edición, donde podrá ingresar la información requerida para el nuevo registro.
+  3. Eliminar Datos: Si necesita eliminar un registro, seleccione la fila deseada y haga clic en el botón “Borrar”. Se le pedirá que confirme la acción antes de que se elimine definitivamente la información.  
+
+  ![Gestion de datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/visualizacion.png)  
+
+  **Modificar datos**
+  1. Introducción de Datos: Al acceder a esta ventana, encontrará campos para ingresar o editar la información.
+  2. Añadir Nuevos Datos: La aplicación utiliza la misma ventana para introducir nuevos datos y para editarlos, facilitando el uso.
+  3. Guardar Cambios: Una vez que haya ingresado o modificado la información, haga clic en el botón “Aceptar” para guardar los cambios.  
+
+  ![Modificar datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Modificacion.png)  
+
+  **Crear solicitudes**  
+
+  ![Creacion de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Creacion.png)  
+
+  **Gestion de solicitudes**  
+
+  ![Gestion de solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/gestion.png)  
+
+  **Revisión de actividades y solicitudes**
+  1. Visualización de Actividades y solicitudes: La tabla muestra los detalles importantes de cada actividad, como el ID, el título, el tipo, las fechas, y si se requiere transporte o alojamiento.
+  2. Edición de Actividades y solicitudes: Para modificar la información de una actividad, realice un doble clic sobre la fila correspondiente. Esto abrirá la ventana de edición, donde podrá actualizar los datos necesarios.  
+
+  ![Revision  de actividades y solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Revision.png)  
 
 
 # 5.- SOFTWARE UTILIZADO <a name="software"></a>
