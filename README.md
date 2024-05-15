@@ -122,7 +122,9 @@
 
 # 2. SERVIDORES <a name="servidores"></a>
 
-  ## SERVIDOR BASE DE DATOS MARIADB
+  ## SERVIDOR BASE DE DATOS MARIADB  
+
+  [Ova ](https://drive.google.com/file/d/1iz1FwSp_O5ZKs6jGE6jYrHDsfCGmY5B_/view?usp=sharing)
 
   La elección del servidor de base de datos se realizó en base a varias consideraciones:  
 
