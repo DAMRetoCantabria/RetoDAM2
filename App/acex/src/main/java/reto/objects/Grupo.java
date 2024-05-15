@@ -118,6 +118,8 @@ public class Grupo {
             return false;
         }
         Grupo other = (Grupo) obj;
-        return id == other.id;
+
+        return other.codigo.equals(codigo) && other.curso.equals(curso) && other.num_alumnos == num_alumnos
+                && other.activo == activo;
     }
 }

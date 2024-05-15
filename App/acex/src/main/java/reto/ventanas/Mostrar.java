@@ -54,6 +54,7 @@ public class Mostrar extends JPanel {
     private JComboBox<String> jefeCombo;
     private JTextField jefeField;
     private String activoValue;
+    private Listado_admin listado;
 
     /**
      * La clase Mostrar es una subclase de JPanel que se utiliza para mostrar los
@@ -68,7 +69,8 @@ public class Mostrar extends JPanel {
      *               3: Curso, 4: Departamento).
      * @param object El objeto del cual se van a mostrar los datos.
      */
-    public Mostrar(int tipo, Object object) {
+    public Mostrar(int tipo, Object object, Listado_admin listado) {
+        this.listado = listado;
         init(tipo, object);
     }
 
@@ -228,7 +230,8 @@ public class Mostrar extends JPanel {
             codigoField = new JTextField((departamento == null) ? "" : departamento.getCodigo());
             setDocumentfilter(codigoField, 3);
         }
-        codigoField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        codigoField.setEditable(editable);
         codigoField.setHorizontalAlignment(JTextField.RIGHT);
 
         panel.add(codigo, "split 2");
@@ -241,11 +244,12 @@ public class Mostrar extends JPanel {
         JPanel panel = new JPanel(new MigLayout("fill, insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
         JLabel titulo = new JLabel(tit);
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
         if (tipo == 1) {
             Profesor profesor = (Profesor) object;
             nombreField = new JTextField((profesor == null) ? "" : String.valueOf(profesor.getNombre()));
             setDocumentfilter(nombreField, 45);
-            nombreField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+            nombreField.setEditable(editable);
             nombreField.setHorizontalAlignment(JTextField.RIGHT);
             panel.add(titulo);
             panel.add(nombreField, "width 200!, dock east");
@@ -253,7 +257,7 @@ public class Mostrar extends JPanel {
             Grupo grupo = (Grupo) object;
             alumnosField = new JTextField((grupo == null) ? "" : String.valueOf(grupo.getNum_alumnos()));
             setDocumentfilter(alumnosField, 2);
-            alumnosField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+            alumnosField.setEditable(editable);
             alumnosField.setHorizontalAlignment(JTextField.RIGHT);
             panel.add(titulo, "split 2");
             panel.add(alumnosField, "width 200!, dock east");
@@ -261,7 +265,7 @@ public class Mostrar extends JPanel {
             Curso curso = (Curso) object;
             descripcionField = new JTextField((curso == null) ? "" : curso.getDescripcion());
             setDocumentfilter(descripcionField, 99);
-            descripcionField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+            descripcionField.setEditable(editable);
             descripcionField.setHorizontalAlignment(JTextField.RIGHT);
             panel.add(titulo, "split 2");
             panel.add(descripcionField, "width 200!, dock east");
@@ -269,7 +273,7 @@ public class Mostrar extends JPanel {
             Departamento departamento = (Departamento) object;
             nombreField = new JTextField((departamento == null) ? "" : departamento.getNombre());
             setDocumentfilter(nombreField, 99);
-            nombreField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+            nombreField.setEditable(editable);
             nombreField.setHorizontalAlignment(JTextField.RIGHT);
             panel.add(titulo, "split 2");
             panel.add(nombreField, "width 200!, dock east");
@@ -284,7 +288,8 @@ public class Mostrar extends JPanel {
         jefeCombo = null;
         jefeField = null;
         ProfesorDAO profesorSQL = new ProfesorDAO();
-        if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        if (editable) {
             jefeCombo = new JComboBox<String>();
             List<Profesor> profesores = profesorSQL.listar();
             int index = -1;
@@ -325,7 +330,8 @@ public class Mostrar extends JPanel {
         JLabel etapa = new JLabel("Etapa");
         etapaCombo = null;
         etapaField = null;
-        if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        if (editable) {
             etapaCombo = new JComboBox<String>();
             for (Etapa et : Etapa.values()) {
                 etapaCombo.addItem(et.name());
@@ -350,10 +356,11 @@ public class Mostrar extends JPanel {
         JPanel panel = new JPanel(new MigLayout("fill, insets 0"));
         panel.putClientProperty(FlatClientProperties.STYLE, "" + "background:null");
         JLabel activo = new JLabel("Activo");
-        JTextField activoField = null;
+        JTextField activoField = new JTextField("0");
         activoRadio1 = null;
         activoRadio2 = null;
-        if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        if (editable) {
             activoRadio1 = new JRadioButton("Si");
             activoRadio2 = new JRadioButton("No");
             ButtonGroup group = new ButtonGroup();
@@ -370,7 +377,7 @@ public class Mostrar extends JPanel {
         }
         if (tipo == 1) {
             Profesor profesor = (Profesor) objetct;
-            if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+            if (editable) {
                 if (profesor != null) {
                     if (profesor.isActivo()) {
                         activoRadio1.setSelected(true);
@@ -383,7 +390,7 @@ public class Mostrar extends JPanel {
             }
         } else if (tipo == 2) {
             Grupo grupo = (Grupo) objetct;
-            if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+            if (editable) {
                 if (grupo != null) {
                     if (grupo.isActivo()) {
                         activoRadio1.setSelected(true);
@@ -396,7 +403,7 @@ public class Mostrar extends JPanel {
             }
         } else if (tipo == 3) {
             Curso curso = (Curso) objetct;
-            if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+            if (editable) {
                 if (curso != null) {
                     if (curso.isActivo()) {
                         activoRadio1.setSelected(true);
@@ -418,7 +425,8 @@ public class Mostrar extends JPanel {
         cursoCombo = null;
         cursoField = null;
         CursosDAO cursosSQL = new CursosDAO();
-        if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        if (editable) {
             cursoCombo = new JComboBox<String>();
             List<Curso> cursos = cursosSQL.listar();
             int index = -1;
@@ -479,7 +487,8 @@ public class Mostrar extends JPanel {
         JLabel dni = new JLabel("Dni");
         dniField = new JTextField((profesor == null) ? "" : profesor.getDni());
         setDocumentfilter(dniField, 9);
-        dniField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        dniField.setEditable(editable);
         dniField.setHorizontalAlignment(JTextField.RIGHT);
         panel.add(dni, "split 2");
         panel.add(dniField, "width 200!, dock east");
@@ -493,7 +502,8 @@ public class Mostrar extends JPanel {
         JLabel apellidos = new JLabel("Apellidos");
         apellidosField = new JTextField((profesor == null) ? "" : profesor.getApellidos());
         setDocumentfilter(apellidosField, 45);
-        apellidosField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        apellidosField.setEditable(editable);
         apellidosField.setHorizontalAlignment(JTextField.RIGHT);
         panel.add(apellidos, "split 2");
         panel.add(apellidosField, "width 200!, dock east");
@@ -507,7 +517,8 @@ public class Mostrar extends JPanel {
         JLabel correo = new JLabel("Correo");
         correoField = new JTextField((profesor == null) ? "" : profesor.getCorreo());
         setDocumentfilter(correoField, 80);
-        correoField.setEditable(Login.user.getNivel().equalsIgnoreCase("Superusuario"));
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        correoField.setEditable(editable);
         correoField.setHorizontalAlignment(JTextField.RIGHT);
         panel.add(correo, "split 2");
         panel.add(correoField, "width 200!, dock east");
@@ -522,7 +533,8 @@ public class Mostrar extends JPanel {
         departamentoCombo = null;
         departamentoField = null;
         DepartamentoDAO departamentosSQL = new DepartamentoDAO();
-        if (Login.user.getNivel().equalsIgnoreCase("Superusuario")) {
+        boolean editable = Login.user.getNivel().equalsIgnoreCase("Superusuario") || Login.user.getNivel().equalsIgnoreCase("Administrador");
+        if (editable) {
             departamentoCombo = new JComboBox<String>();
             List<Departamento> departamentos = departamentosSQL.listar();
             int index = -1;
@@ -577,6 +589,7 @@ public class Mostrar extends JPanel {
             if (validaProfesor(dniValue, nombreValue, apellidosValue, correoValue, nivelValue, departamentoValue)) {
                 Profesor profe;
                 if (Integer.parseInt(idValue.equals("") ? "0" : idValue) > 0) {
+                    Profesor prof = profesorSQL.buscar(Integer.valueOf(idValue));
                     profe = new Profesor(Integer.parseInt(idValue), dniValue, nombreValue,
                             apellidosValue,
                             correoValue,
@@ -586,6 +599,11 @@ public class Mostrar extends JPanel {
                             profesorSQL.buscar(Integer.valueOf(idValue)).getFoto() == null ? null
                                     : profesorSQL.buscar(Integer.valueOf(idValue)).getFoto(),
                             departamentoSQL.buscar(departamentoValue));
+
+                    if (profe.equals(prof)) {
+                        JOptionPane.showMessageDialog(null, "No se ha modificado ningún campo.");
+                        return;
+                    }
                 } else {
                     profe = new Profesor(dniValue, nombreValue,
                             apellidosValue,
@@ -596,6 +614,9 @@ public class Mostrar extends JPanel {
                 JOptionPane.showMessageDialog(null, "Se ha actualizado el profesor con éxito.");
                 VentanaSingleton.getInstance().cerrarVentana("Modificar Profesor");
                 profesorSQL.guardar(profe);
+                if (listado != null) {
+                    listado.actualizarTabla("profesores");
+                }
             }
         } else if (tipo == 2) {
             String idValue = idField.getText();
@@ -605,10 +626,15 @@ public class Mostrar extends JPanel {
 
             if (validaGrupo(codigoValue, alumnosValue, cursoValue)) {
                 Grupo grupo;
+                Grupo gru = grupoSQL.buscar(Integer.valueOf(idValue));
                 if (Integer.parseInt(idValue.equals("") ? "0" : idValue) > 0) {
                     grupo = new Grupo(Integer.parseInt(idValue), cursoSQL.buscar(cursoValue), codigoValue,
                             Integer.parseInt(alumnosValue),
                             activoValue.equals("1") ? true : false);
+                        if (grupo.equals(gru)) {
+                            JOptionPane.showMessageDialog(null, "No se ha modificado ningún campo.");
+                            return;
+                        }
                 } else {
                     grupo = new Grupo(cursoSQL.buscar(cursoValue), codigoValue, Integer.parseInt(alumnosValue),
                             activoValue.equals("1") ? true : false);
@@ -616,6 +642,9 @@ public class Mostrar extends JPanel {
                 JOptionPane.showMessageDialog(null, "Se ha actualizado el grupo con éxito.");
                 VentanaSingleton.getInstance().cerrarVentana("Modificar Grupos");
                 grupoSQL.guardar(grupo);
+                if (listado != null) {
+                    listado.actualizarTabla("grupos");
+                }
             }
         } else if (tipo == 3) {
             String idValue = idField.getText();
@@ -627,10 +656,15 @@ public class Mostrar extends JPanel {
 
             if (validaCurso(codigoValue, descripcionValue, etapaValue)) {
                 Curso curso;
+                Curso cur = cursoSQL.buscar(Integer.valueOf(idValue));
                 if (Integer.parseInt(idValue.equals("") ? "0" : idValue) > 0) {
                     curso = new Curso(Integer.parseInt(idValue), codigoValue, descripcionValue,
                             Etapa.valueOf(etapaValue),
                             activoValue.equals("1") ? true : false);
+                        if (curso.equals(cur)) {
+                            JOptionPane.showMessageDialog(null, "No se ha modificado ningún campo.");
+                            return;
+                        }
                 } else {
                     curso = new Curso(codigoValue, descripcionValue, Etapa.valueOf(etapaValue),
                             activoValue.equals("1") ? true : false);
@@ -638,6 +672,9 @@ public class Mostrar extends JPanel {
                 JOptionPane.showMessageDialog(null, "Se ha actualizado el curso con éxito.");
                 VentanaSingleton.getInstance().cerrarVentana("Modificar Cursos");
                 cursoSQL.guardar(curso);
+                if (listado != null) {
+                    listado.actualizarTabla("cursos");
+                }
             }
 
         } else if (tipo == 4) {
@@ -645,13 +682,24 @@ public class Mostrar extends JPanel {
             String codigoValue = codigoField.getText();
             String nombreValue = nombreField.getText();
             String jefeValue = (String) jefeCombo.getSelectedItem();
-            int id_jefe = Integer.parseInt(jefeValue.split("-")[0]);
+            int id_jefe;
+            if (jefeValue == null) {
+                id_jefe = -1;
+            } else {
+                id_jefe = Integer.parseInt(jefeValue.split("-")[0]);
+            }
+            
 
             if (validaDepartamento(codigoValue, nombreValue, jefeValue)) {
                 Departamento departamento;
+                Departamento depa = departamentoSQL.buscar(Integer.valueOf(idValue));
                 if (Integer.parseInt(idValue.equals("") ? "0" : idValue) > 0) {
                     departamento = new Departamento(Integer.parseInt(idValue), codigoValue, nombreValue,
                             profesorSQL.buscar(id_jefe));
+                    if (departamento.equals(depa)) {
+                        JOptionPane.showMessageDialog(null, "No se ha modificado ningún campo.");
+                        return;
+                    }
                 } else {
                     departamento = new Departamento(codigoValue, nombreValue,
                             profesorSQL.buscar(id_jefe));
@@ -659,6 +707,9 @@ public class Mostrar extends JPanel {
                 JOptionPane.showMessageDialog(null, "Se ha actualizado el departamento con éxito.");
                 VentanaSingleton.getInstance().cerrarVentana("Modificar Departamentos");
                 departamentoSQL.guardar(departamento);
+                if (listado != null) {
+                    listado.actualizarTabla("departamentos");
+                }
             }
 
         }
@@ -693,7 +744,7 @@ public class Mostrar extends JPanel {
             if (!codigo.matches("^[A-Z0-9]+$")) {
                 JOptionPane.showMessageDialog(null, "Código no válido.");
                 return false;
-            } else if (!descripcion.matches("^([A-Z][a-záéíóú]*)(\\s[A-Za-záéíóú]*)*$")) {
+            } else if (!descripcion.matches("^([A-Z][a-záéíóú]*)(\\s[A-Za-z0-9áéíóúºª]*)*$")) {
                 JOptionPane.showMessageDialog(null, "Descripción no válida.");
                 return false;
             } else if (etapa == null) {

@@ -239,6 +239,6 @@ public class Profesor {
             return false;
         }
         Profesor other = (Profesor) obj;
-        return id == other.id;
+        return other.nombre.equals(nombre) && other.apellidos.equals(apellidos) && other.correo.equals(correo) && other.dni.equals(dni) && other.nivel.equals(nivel) && other.activo == activo && other.departamento.equals(departamento);
     }
 }

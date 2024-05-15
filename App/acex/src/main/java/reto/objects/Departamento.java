@@ -87,4 +87,26 @@ public class Departamento {
     public Profesor getJefe() {
         return jefe;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Departamento other = (Departamento) obj;
+
+        if (other.jefe == null) {
+            return other.codigo.equals(codigo) &&
+            other.nombre.equals(nombre);
+        } else {
+            boolean jefecond = ((other.jefe == null && jefe == null) || other.jefe.equals(jefe));
+            return other.codigo.equals(codigo) &&
+            other.nombre.equals(nombre) &&
+            jefecond;
+        }
+    }
 }

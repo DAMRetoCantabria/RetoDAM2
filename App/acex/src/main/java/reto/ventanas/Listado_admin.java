@@ -35,6 +35,7 @@ public class Listado_admin extends JPanel {
     private GruposDAO gruposSQL = new GruposDAO();
     private DepartamentoDAO departamentoSQL = new DepartamentoDAO();
     private MouseAdapter evento2click = null;
+    private Listado_admin listado = this;
 
     /**
      * Constructor de la clase Listado_admin.
@@ -104,23 +105,23 @@ public class Listado_admin extends JPanel {
                         if (tema.equalsIgnoreCase("Profesores")) {
                             profesor = profesorSQL.buscar(id);
                             VentanaSingleton.getInstance().mostrarVentana("Modificar Profesor",
-                                    new Mostrar(1, profesor),
+                                    new Mostrar(1, profesor, listado),
                                     new Dimension(700, 700));
                         } else if (tema.equalsIgnoreCase("Cursos")) {
                             CursosDAO cursosSQL = new CursosDAO();
                             Curso curso = cursosSQL.buscar(id);
-                            VentanaSingleton.getInstance().mostrarVentana("Modificar Cursos", new Mostrar(3, curso),
+                            VentanaSingleton.getInstance().mostrarVentana("Modificar Cursos", new Mostrar(3, curso, listado),
                                     new Dimension(700, 700));
                         } else if (tema.equalsIgnoreCase("Grupos")) {
                             GruposDAO gruposSQL = new GruposDAO();
                             Grupo grupo = gruposSQL.buscar(id);
-                            VentanaSingleton.getInstance().mostrarVentana("Modificar Grupos", new Mostrar(2, grupo),
+                            VentanaSingleton.getInstance().mostrarVentana("Modificar Grupos", new Mostrar(2, grupo, listado),
                                     new Dimension(700, 700));
                         } else if (tema.equalsIgnoreCase("Departamentos")) {
                             DepartamentoDAO departamentosSQL = new DepartamentoDAO();
                             Departamento departamento = departamentosSQL.buscar(id);
                             VentanaSingleton.getInstance().mostrarVentana("Modificar Departamentos",
-                                    new Mostrar(4, departamento),
+                                    new Mostrar(4, departamento, listado),
                                     new Dimension(700, 700));
                         }
                     }
@@ -210,7 +211,7 @@ public class Listado_admin extends JPanel {
      * @param tema El tema en función del cual se actualiza la tabla. Puede ser
      *             "profesores", "cursos", "grupos" o "departamentos".
      */
-    private void actualizarTabla(String tema) {
+    public void actualizarTabla(String tema) {
         DefaultTableModel model;
         this.tema = tema;
 
@@ -291,23 +292,23 @@ public class Listado_admin extends JPanel {
                     int id = (int) table.getValueAt(row, 0);
                     if (tema.equalsIgnoreCase("Profesores")) {
                         profesor = profesorSQL.buscar(id);
-                        VentanaSingleton.getInstance().mostrarVentana("Modificar Profesor", new Mostrar(1, profesor),
+                        VentanaSingleton.getInstance().mostrarVentana("Modificar Profesor", new Mostrar(1, profesor, listado),
                                 new Dimension(700, 700));
                     } else if (tema.equalsIgnoreCase("Cursos")) {
                         CursosDAO cursosSQL = new CursosDAO();
                         Curso curso = cursosSQL.buscar(id);
-                        VentanaSingleton.getInstance().mostrarVentana("Modificar Cursos", new Mostrar(3, curso),
+                        VentanaSingleton.getInstance().mostrarVentana("Modificar Cursos", new Mostrar(3, curso, listado),
                                 new Dimension(700, 700));
                     } else if (tema.equalsIgnoreCase("Grupos")) {
                         GruposDAO gruposSQL = new GruposDAO();
                         Grupo grupo = gruposSQL.buscar(id);
-                        VentanaSingleton.getInstance().mostrarVentana("Modificar Grupos", new Mostrar(2, grupo),
+                        VentanaSingleton.getInstance().mostrarVentana("Modificar Grupos", new Mostrar(2, grupo, listado),
                                 new Dimension(700, 700));
                     } else if (tema.equalsIgnoreCase("Departamentos")) {
                         DepartamentoDAO departamentosSQL = new DepartamentoDAO();
                         Departamento departamento = departamentosSQL.buscar(id);
                         VentanaSingleton.getInstance().mostrarVentana("Modificar Departamentos",
-                                new Mostrar(4, departamento),
+                                new Mostrar(4, departamento, listado),
                                 new Dimension(700, 700));
                     }
                 }

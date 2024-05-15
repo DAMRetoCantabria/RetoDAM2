@@ -117,7 +117,8 @@ public class Curso {
             return false;
         }
         Curso other = (Curso) obj;
-        return id == other.id;
+        return other.codigo.equals(codigo) && other.descripcion.equals(descripcion) && other.etapa.equals(etapa)
+                && other.activo == activo;
     }
 
 }

@@ -165,8 +165,8 @@ public class Listado_actividades extends JPanel {
         List<Solicitud> solicitudes = solicitudSQL.listar();
         ProfesorDAO profesorSQL = new ProfesorDAO();
         for (Solicitud solicitud : solicitudes) {
-            String fini = solicitud.getFini().toString().concat(" ").concat(solicitud.getHini().toString());
-            String ffin = solicitud.getFfin().toString().concat(" ").concat(solicitud.getHfin().toString());
+            String fini = solicitud.getHini().toString().concat(" ").concat(solicitud.getFini().toString());
+            String ffin = solicitud.getHfin().toString().concat(" ").concat(solicitud.getFfin().toString());
             String fecha = fini.concat(" / ").concat(ffin);
             List<Profesor> responsables = solicitud.getResponsables();
             if (String.valueOf(solicitud.getEstado()).equalsIgnoreCase("solicitada")) {

@@ -167,10 +167,10 @@ public class Menu extends BlurChild {
                                                 new Listado_admin(0), new Dimension(500, 500));
                                     } else if (subIndex == 1) {
                                         VentanaSingleton.getInstance().mostrarVentana("Modificar Grupos",
-                                                new Listado_admin(1), new Dimension(700, 700));
+                                                new Listado_admin(2), new Dimension(700, 700));
                                     } else if (subIndex == 2) {
                                         VentanaSingleton.getInstance().mostrarVentana("Modificar Cursos",
-                                                new Listado_admin(2), new Dimension(700, 700));
+                                                new Listado_admin(1), new Dimension(700, 700));
                                     } else if (subIndex == 3) {
                                         VentanaSingleton.getInstance().mostrarVentana("Modificar Departamentos",
                                                 new Listado_admin(3), new Dimension(700, 700));

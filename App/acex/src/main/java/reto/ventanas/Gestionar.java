@@ -530,7 +530,7 @@ public class Gestionar extends JPanel {
                             solicitud.isTransp_requerido(),
                             solicitud.getTransp_comentario(), solicitud.isAloj_requerido(),
                             solicitud.getAloj_comentario(),
-                            solicitud.getComentario(), EstadoActividad.Aprobada, comentario_estado_text.getText(),
+                            solicitud.getComentario(), EstadoActividad.Aprobada, comentario_estado_text.getText().equals("") ? "Sin comentarios" : comentario_estado_text.getText(),
                             "", 0, solicitud.getTransportes(), solicitud.getResponsables(),
                             solicitud.getParticipantes(), solicitud.getCursos(), solicitud.getGrupos());
                     int n = programadasSQL.guardar(programada);

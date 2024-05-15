@@ -21,13 +21,7 @@ import raven.datetime.component.date.DatePicker;
 import raven.datetime.component.time.TimePicker;
 import reto.components.Multiseleccion;
 import reto.objects.*;
-import reto.sql.CursosDAO;
-import reto.sql.DepartamentoDAO;
-import reto.sql.GruposDAO;
-import reto.sql.ProfesorDAO;
-import reto.sql.ProgramadasDAO;
-import reto.sql.SolicitudDAO;
-import reto.sql.TransporteDAO;
+import reto.sql.*;
 import reto.utilidades.*;
 import reto.components.VentanaSingleton;
 
@@ -311,13 +305,10 @@ public class Solicitudes extends JPanel {
             observaciones_trans.setText(solicitud.getTransp_comentario());
         } else if (estado == 3) {
             ProgramadasDAO programadaSQL = new ProgramadasDAO();
-            System.out.println(programada.getTitulo());
-            System.out.println(programada.getId_programada());
             List<MediosTransporte> transps = programadaSQL.buscaTransporte(programada.getId_programada());
             List<Object> transps2 = new ArrayList<>();
             for (MediosTransporte t : transps) {
                 transps2.add(t.getNombre());
-                System.out.println(t.getNombre());
             }
             transporte_desp.setSelectedItems(transps2);
             observaciones_trans.setText(programada.getTransp_comentario());
@@ -447,7 +438,6 @@ public class Solicitudes extends JPanel {
 
             @Override
             public void removeUpdate(DocumentEvent arg0) {
-                System.out.println(nalumnos_ausentes.getText().length());
                 if (nalumnos_ausentes.getText().length() == 0) {
                     nalumnos_totales.setText(String.valueOf(Integer.parseInt(totalText + nalumnos_ausentes.getText())));
                 }
@@ -852,9 +842,7 @@ public class Solicitudes extends JPanel {
      */
     private void onAceptarClicked() {
         if (validaSolicitud()) {
-            System.out.println(estado);
             if (estado == 2 || estado == 1) {
-                System.out.println("Click crear solicitud");
                 creaSolicitud();
             } else if (estado == 3) {
                 creaProgramada();
@@ -917,7 +905,7 @@ public class Solicitudes extends JPanel {
             JOptionPane.showMessageDialog(null, "Debes introducir observaciones correctas.");
             return false;
         } else if (estado == 3) {
-            if (emp_transporte.getText().matches("^([A-Z0-9Ña-záéíóñúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
+            if (!emp_transporte.getText().matches("^([A-Z0-9Ña-záéíóñúºª]*)(\\s[A-Za-z0-9ñÑºªáéíóú]*)*$")) {
                 JOptionPane.showMessageDialog(null, "Debes introducir una empresa de transporte.");
                 return false;
             } else if (!precio.getText().matches("^\\d{1,5}(\\.\\d{1,2})?$")) {
@@ -927,8 +915,6 @@ public class Solicitudes extends JPanel {
                 return true;
             }
         } else {
-            System.out.println(estado);
-            System.out.println("Todo ok");
             return true;
         }
     }
@@ -944,7 +930,6 @@ public class Solicitudes extends JPanel {
      * de datos y cierra la ventana.
      */
     private void creaSolicitud() {
-        System.out.println("Creando solicitud");
         SolicitudDAO solicitudSQL = new SolicitudDAO();
         boolean cambio = true;
         String titulo = titulo_field.getText();
@@ -964,8 +949,6 @@ public class Solicitudes extends JPanel {
         ProfesorDAO profesorSQL = new ProfesorDAO();
         CursosDAO cursosSQL = new CursosDAO();
         GruposDAO gruposSQL = new GruposDAO();
-
-        System.out.println(n_ausentes);
 
         List<Profesor> participantes = participantes_desp.getSelectedItems().stream()
                 .map(nombre -> (Profesor) profesorSQL.buscar(Integer.parseInt(String.valueOf(nombre).split("-")[0])))
@@ -1025,7 +1008,7 @@ public class Solicitudes extends JPanel {
             id = solicitudSQL.guardar(solicitud);
         }
 
-        if (cambio == true) {
+        if (cambio == true && estado == 2) {
 
             for (Profesor responsable : responsables) {
                 int id_responsable = responsable.getId();
@@ -1116,11 +1099,11 @@ public class Solicitudes extends JPanel {
         int id = 0;
         if (estado == 3) {
             id = programada.getId_programada();
-            Profesor solicitante = profesorSQL.buscar(Login.user.getId());
+            //Profesor solicitante = profesorSQL.buscar(Login.user.getId());
 
-            Programadas newprogramada = new Programadas(id, programada.getSolicitada(), solicitante, titulo, tipo, fini,
+            Programadas newprogramada = new Programadas(id, programada.getSolicitada(), programada.getSolicitante(), titulo, tipo, fini,
                     ffin, hini, hfin, prevista, n_ausentes,
-                    transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
+                    transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Aprobada,
                     programada.getEstado_comentario(), empresa_transporte, precio_transporte, transportes,
                     participantes, responsables, cursos, grupos);
 

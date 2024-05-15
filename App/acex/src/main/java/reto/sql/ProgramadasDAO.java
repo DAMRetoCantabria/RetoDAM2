@@ -48,13 +48,13 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
     public int guardar(Programadas programada) {
         String sql = null;
         if (programada.getId_programada() > 0) {
-            sql = "UPDATE programadas SET id_actividad=?, solicitante=?, titulo=?, tipo=?, fini=?, ffin=?, hini=?, hfin=?, prevista=?, transporte_req=?, coment_transporte=?, alojamiento_req=?, coment_alojamiento=?, comentarios=?, estado=?, coment_estado=?, empresa_transporte=?, precio_transporte=? WHERE id_programada=?";
+            sql = "UPDATE programadas SET id_actividad=?, solicitante=?, titulo=?, tipo=?, fini=?, ffin=?, hini=?, hfin=?, prevista=?, nalumnos_ausentes=?, transporte_req=?, coment_transporte=?, alojamiento_req=?, coment_alojamiento=?, comentarios=?, estado=?, coment_estado=?, empresa_transporte=?, precio_transporte=? WHERE id_programada=?";
         } else {
-            sql = "INSERT INTO programadas(id_actividad, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, transporte_req, coment_transporte, alojamiento_req, coment_alojamiento, comentarios, estado, coment_estado, empresa_transporte, precio_transporte) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            sql = "INSERT INTO programadas(id_actividad, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, nalumnos_ausentes, transporte_req, coment_transporte, alojamiento_req, coment_alojamiento, comentarios, estado, coment_estado, empresa_transporte, precio_transporte) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         }
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             if (programada.getId_programada() > 0) {
-                stmt.setInt(19, programada.getId_programada());
+                stmt.setInt(20, programada.getId_programada());
             }
             stmt.setInt(1, programada.get_solicitada().getId_solicitud());
             stmt.setInt(2, programada.get_solicitante().getId());
@@ -65,15 +65,16 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
             stmt.setTime(7, java.sql.Time.valueOf(programada.getHini()));
             stmt.setTime(8, java.sql.Time.valueOf(programada.getHfin()));
             stmt.setString(9, programada.isPrevisto() ? "1" : "0");
-            stmt.setString(10, programada.isTransp_requerido() ? "1" : "0");
-            stmt.setString(11, programada.getTransp_comentario());
-            stmt.setString(12, programada.isAloj_requerido() ? "1" : "0");
-            stmt.setString(13, programada.getAloj_comentario());
-            stmt.setString(14, programada.getComentario());
-            stmt.setString(15, programada.getEstado().toString());
-            stmt.setString(16, programada.getEstado_comentario());
-            stmt.setString(17, programada.getEmpresa_transporte());
-            stmt.setDouble(18, programada.getPrecio_transporte());
+            stmt.setInt(10, programada.getNalumnos_ausentes());
+            stmt.setString(11, programada.isTransp_requerido() ? "1" : "0");
+            stmt.setString(12, programada.getTransp_comentario());
+            stmt.setString(13, programada.isAloj_requerido() ? "1" : "0");
+            stmt.setString(14, programada.getAloj_comentario());
+            stmt.setString(15, programada.getComentario());
+            stmt.setString(16, programada.getEstado().toString());
+            stmt.setString(17, programada.getEstado_comentario());
+            stmt.setString(18, programada.getEmpresa_transporte());
+            stmt.setDouble(19, programada.getPrecio_transporte());
 
             int salida = stmt.executeUpdate();
             if (salida != 1) {

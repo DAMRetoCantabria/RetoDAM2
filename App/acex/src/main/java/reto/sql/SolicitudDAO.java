@@ -73,7 +73,7 @@ public class SolicitudDAO implements RepositorioSolicitud<Solicitud> {
         }
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             if (solicitud.getId_solicitud() > 0) {
-                stmt.setInt(16, solicitud.getId_solicitud());
+                stmt.setInt(17, solicitud.getId_solicitud());
             }
             stmt.setInt(1, solicitud.get_solicitante().getId());
             stmt.setString(2, solicitud.getTitulo());
