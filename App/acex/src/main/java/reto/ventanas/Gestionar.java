@@ -526,6 +526,7 @@ public class Gestionar extends JPanel {
                             solicitud.get_solicitante(),
                             solicitud.getTitulo(), solicitud.getTipo(), solicitud.getFini(), solicitud.getFfin(),
                             solicitud.getHini(), solicitud.getHfin(), solicitud.isPrevisto(),
+                            solicitud.getAlumnos_ausentes(),
                             solicitud.isTransp_requerido(),
                             solicitud.getTransp_comentario(), solicitud.isAloj_requerido(),
                             solicitud.getAloj_comentario(),

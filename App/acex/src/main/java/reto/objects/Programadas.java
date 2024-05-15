@@ -22,6 +22,7 @@ public class Programadas {
     private LocalTime hini;
     private LocalTime hfin;
     private boolean previsto;
+    private int nalumnos_ausentes;
     private boolean transp_requerido;
     private String transp_comentario;
     private boolean aloj_requerido;
@@ -71,7 +72,8 @@ public class Programadas {
      * @param grupos             La lista de grupos asociados a la actividad.
      */
     public Programadas(int id_programada, Solicitud solicitada, Profesor solicitante, String titulo, TipoActividad tipo,
-            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, boolean transp_requerido,
+            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, int nalumnos_ausentes,
+            boolean transp_requerido,
             String transp_comentario, boolean aloj_requerido, String aloj_comentario, String comentario,
             EstadoActividad estado, String estado_comentario, String empresa_transporte, double precio_transporte,
             List<MediosTransporte> transportes, List<Profesor> responsables, List<Profesor> participantes,
@@ -86,6 +88,7 @@ public class Programadas {
         this.hini = hini;
         this.hfin = hfin;
         this.previsto = previsto;
+        this.nalumnos_ausentes = nalumnos_ausentes;
         this.transp_requerido = transp_requerido;
         this.transp_comentario = transp_comentario;
         this.aloj_requerido = aloj_requerido;
@@ -136,7 +139,8 @@ public class Programadas {
      * @param grupos             La lista de grupos asociados a la actividad.
      */
     public Programadas(Solicitud solicitada, Profesor solicitante, String titulo, TipoActividad tipo,
-            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, boolean transp_requerido,
+            LocalDate fini, LocalDate ffin, LocalTime hini, LocalTime hfin, boolean previsto, int nalumnos_ausentes,
+            boolean transp_requerido,
             String transp_comentario, boolean aloj_requerido, String aloj_comentario, String comentario,
             EstadoActividad estado, String estado_comentario, String empresa_transporte, double precio_transporte,
             List<MediosTransporte> transportes, List<Profesor> responsables, List<Profesor> participantes,
@@ -150,6 +154,7 @@ public class Programadas {
         this.hini = hini;
         this.hfin = hfin;
         this.previsto = previsto;
+        this.nalumnos_ausentes = nalumnos_ausentes;
         this.transp_requerido = transp_requerido;
         this.transp_comentario = transp_comentario;
         this.aloj_requerido = aloj_requerido;
@@ -417,6 +422,15 @@ public class Programadas {
      */
     public List<Grupo> getGrupos() {
         return grupos;
+    }
+
+    /**
+     * Obtiene el número de alumnos ausentes en la actividad.
+     * 
+     * @return El número de alumnos ausentes en la actividad.
+     */
+    public int getNalumnos_ausentes() {
+        return nalumnos_ausentes;
     }
 
     /**

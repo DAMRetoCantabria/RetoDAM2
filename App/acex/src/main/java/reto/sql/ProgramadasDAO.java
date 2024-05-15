@@ -236,7 +236,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
      * @return Una lista de objetos Profesor que son los responsables.
      */
     public List<Profesor> buscaResponsable(int id_solicitud) {
-        String sql = "SELECT id_responsable FROM responsables WHERE id_actividad=?";
+        String sql = "SELECT id_responsable FROM responsables_programada WHERE id_programada=?";
         ProfesorDAO profesorSQL = new ProfesorDAO();
         List<Profesor> participantes = new ArrayList<>();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -264,7 +264,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
      * @return Una lista de objetos MediosTransporte que son los transportes.
      */
     public List<MediosTransporte> buscaTransporte(int id_solicitud) {
-        String sql = "SELECT id_transporte FROM transporte WHERE id_actividad=?";
+        String sql = "SELECT id_transporte FROM transporte_programado WHERE id_programada=?";
         TransporteDAO transporteSQL = new TransporteDAO();
         List<MediosTransporte> transportes = new ArrayList<>();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -292,7 +292,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
      * @return Una lista de objetos Curso que son los cursos.
      */
     public List<Curso> buscaCursos(int id_solicitud) {
-        String sql = "SELECT id_curso FROM cursos_participa WHERE id_actividad=?";
+        String sql = "SELECT id_curso FROM cursos_programadas WHERE id_programada=?";
         CursosDAO cursoSQL = new CursosDAO();
         List<Curso> cursos = new ArrayList<>();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -320,7 +320,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
      * @return Una lista de objetos Grupo que son los grupos.
      */
     public List<Grupo> buscaGrupos(int id_solicitud) {
-        String sql = "SELECT id_grupo FROM grupos_participa WHERE id_actividad=?";
+        String sql = "SELECT id_grupo FROM grupos_programadas WHERE id_programada=?";
         GruposDAO grupoSQL = new GruposDAO();
         List<Grupo> grupos = new ArrayList<>();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -348,7 +348,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
      * @return Una lista de objetos Profesor que son los participantes.
      */
     public List<Profesor> buscaParticipantes(int id_solicitud) {
-        String sql = "SELECT id_participante FROM participantes WHERE id_actividad=?";
+        String sql = "SELECT id_participante FROM participantes_programada WHERE id_programada=?";
         ProfesorDAO profesorSQL = new ProfesorDAO();
         List<Profesor> participantes = new ArrayList<>();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -462,7 +462,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
                 rs.getString("titulo"),
                 rs.getString("tipo") == "extraescolar" ? TipoActividad.Extraescolar : TipoActividad.Complementaria,
                 rs.getDate("fini").toLocalDate(), rs.getDate("ffin").toLocalDate(), rs.getTime("hini").toLocalTime(),
-                rs.getTime("hfin").toLocalTime(), rs.getBoolean("prevista"),
+                rs.getTime("hfin").toLocalTime(), rs.getBoolean("prevista"), rs.getInt("nalumnos_ausentes"),
                 rs.getBoolean("transporte_req"), rs.getString("coment_transporte"), rs.getBoolean("alojamiento_req"),
                 rs.getString("coment_alojamiento"),
                 rs.getString("comentarios"),

@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -86,6 +86,7 @@ public class Solicitudes extends JPanel {
     private JLabel alumnos_totales;
     private JTextField nalumnos_totales;
     private int nalu;
+    private int cambio;
 
     /**
      * Constructor de la clase Solicitudes.
@@ -310,10 +311,13 @@ public class Solicitudes extends JPanel {
             observaciones_trans.setText(solicitud.getTransp_comentario());
         } else if (estado == 3) {
             ProgramadasDAO programadaSQL = new ProgramadasDAO();
+            System.out.println(programada.getTitulo());
+            System.out.println(programada.getId_programada());
             List<MediosTransporte> transps = programadaSQL.buscaTransporte(programada.getId_programada());
             List<Object> transps2 = new ArrayList<>();
             for (MediosTransporte t : transps) {
                 transps2.add(t.getNombre());
+                System.out.println(t.getNombre());
             }
             transporte_desp.setSelectedItems(transps2);
             observaciones_trans.setText(programada.getTransp_comentario());
@@ -428,28 +432,128 @@ public class Solicitudes extends JPanel {
         alumnos_ausentes = new JLabel("Alumnos ausentes: ");
         nalumnos_ausentes = new JTextField();
 
+        nalumnos_ausentes.getDocument().addDocumentListener(new DocumentListener() {
+            String totalText = String.valueOf(nalu);
+
+            @Override
+            public void changedUpdate(DocumentEvent arg0) {
+                update();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent arg0) {
+                update();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent arg0) {
+                System.out.println(nalumnos_ausentes.getText().length());
+                if (nalumnos_ausentes.getText().length() == 0) {
+                    nalumnos_totales.setText(String.valueOf(Integer.parseInt(totalText + nalumnos_ausentes.getText())));
+                }
+                update();
+            }
+
+            public void update() {
+                totalText = String.valueOf(nalu);
+                String ausentesText = nalumnos_ausentes.getText();
+
+                if (!ausentesText.equals("")) {
+                    int total = Integer.parseInt(totalText);
+                    int ausentes = Integer.parseInt(ausentesText);
+
+                    nalumnos_totales.setText(String.valueOf((total - ausentes) < 0 ? 0 : total - ausentes));
+                } else {
+                    nalumnos_totales.setText(totalText);
+                }
+            }
+        });
+
+        alumnos_desp.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (cursos_boton.isSelected() && cambio >= 2) {
+                    CursosDAO cursosSQL = new CursosDAO();
+                    Curso c = (Curso) cursosSQL.buscar(String.valueOf(alumnos_desp.getSelectedItem()));
+                    List<Curso> cursos = alumnos_desp.getSelectedItems().stream()
+                            .map(nombre -> (Curso) cursosSQL.buscar(String.valueOf(nombre)))
+                            .collect(Collectors.toList());
+                    boolean coincide = false;
+                    for (Curso curso : cursos) {
+                        if (curso.getCodigo().equals(c.getCodigo())) {
+                            coincide = true;
+                        }
+                    }
+                    if (coincide == true) {
+                        nalu -= c.getNumAlumnos();
+                    } else {
+                        nalu += c.getNumAlumnos();
+                    }
+
+                    nalumnos_totales.setText(String.valueOf((nalu - (nalumnos_ausentes.getText().isEmpty() ? 0
+                            : Integer.parseInt(nalumnos_ausentes.getText()))) < 0 ? 0
+                                    : nalu - (nalumnos_ausentes.getText().isEmpty() ? 0
+                                            : Integer.parseInt(nalumnos_ausentes.getText()))));
+
+                } else if (grupos_boton.isSelected() && cambio >= 2) {
+                    GruposDAO gruposSQL = new GruposDAO();
+                    Grupo g = (Grupo) gruposSQL.buscar(String.valueOf(alumnos_desp.getSelectedItem()));
+                    List<Grupo> grupos = alumnos_desp.getSelectedItems().stream()
+                            .map(nombre -> (Grupo) gruposSQL.buscar(String.valueOf(nombre)))
+                            .collect(Collectors.toList());
+                    boolean coincide = false;
+                    for (Grupo grupo : grupos) {
+
+                        if (grupo.getCodigo().equals(g.getCodigo())) {
+                            coincide = true;
+                        }
+                    }
+                    if (coincide == true) {
+                        nalu -= g.getNum_alumnos();
+                    } else {
+                        nalu += g.getNum_alumnos();
+                    }
+                    nalumnos_totales.setText(String.valueOf((nalu - (nalumnos_ausentes.getText().isEmpty() ? 0
+                            : Integer.parseInt(nalumnos_ausentes.getText()))) < 0 ? 0
+                                    : nalu - (nalumnos_ausentes.getText().isEmpty() ? 0
+                                            : Integer.parseInt(nalumnos_ausentes.getText()))));
+
+                } else {
+                    cambio++;
+                }
+            }
+
+        });
+
         cursos_boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                cambio = 0;
                 alumnos_desp.removeAllItems();
                 CursosDAO cursosSQL = new CursosDAO();
                 List<Curso> cursos = cursosSQL.listar();
                 for (Curso curso : cursos) {
                     alumnos_desp.addItem(curso.getCodigo());
                 }
+                nalumnos_totales.setText("");
+                nalu = 0;
                 alumnos_desp.clearSelectedItems();
+
             }
         });
 
         grupos_boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cambio = 0;
                 alumnos_desp.removeAllItems();
                 GruposDAO gruposSQL = new GruposDAO();
                 List<Grupo> grupos = gruposSQL.listar();
                 for (Grupo grupo : grupos) {
                     alumnos_desp.addItem(grupo.getCodigo());
                 }
+                nalumnos_totales.setText("");
+                nalu = 0;
                 alumnos_desp.clearSelectedItems();
             }
         });
@@ -458,6 +562,7 @@ public class Solicitudes extends JPanel {
             SolicitudDAO solicitudSQL = new SolicitudDAO();
             List<Curso> cursos = new ArrayList<>();
             List<Grupo> grupos = new ArrayList<>();
+            int nalu = 0;
             if (solicitud.getCursos().isEmpty()) {
                 grupos_boton.doClick();
                 grupos = solicitudSQL.buscaGrupos(solicitud.getId_solicitud());
@@ -468,19 +573,25 @@ public class Solicitudes extends JPanel {
             List<Object> alumnos2 = new ArrayList<>();
             if (cursos_boton.isSelected()) {
                 for (Curso curso : cursos) {
+                    nalu += curso.getNumAlumnos();
                     alumnos2.add(curso.getCodigo());
                 }
             } else {
                 for (Grupo grupo : grupos) {
+                    nalu += grupo.getNum_alumnos();
                     alumnos2.add(grupo.getCodigo());
                 }
             }
             alumnos_desp.setSelectedItems(alumnos2);
             nalumnos_ausentes.setText(String.valueOf(solicitud.getAlumnos_ausentes()));
+            this.nalu = nalu;
+            nalumnos_totales.setText(String.valueOf(nalu - Integer.parseInt(nalumnos_ausentes.getText())));
+
         } else if (estado == 3) {
             ProgramadasDAO programadasSQL = new ProgramadasDAO();
             List<Curso> cursos = new ArrayList<>();
             List<Grupo> grupos = new ArrayList<>();
+            int nalu = 0;
             if (programada.getCursos().isEmpty()) {
                 grupos_boton.doClick();
                 grupos = programadasSQL.buscaGrupos(programada.getId_programada());
@@ -491,33 +602,20 @@ public class Solicitudes extends JPanel {
             List<Object> alumnos2 = new ArrayList<>();
             if (cursos_boton.isSelected()) {
                 for (Curso curso : cursos) {
+                    nalu += curso.getNumAlumnos();
                     alumnos2.add(curso.getCodigo());
                 }
             } else {
                 for (Grupo grupo : grupos) {
+                    nalu += grupo.getNum_alumnos();
                     alumnos2.add(grupo.getCodigo());
                 }
             }
             alumnos_desp.setSelectedItems(alumnos2);
+            nalumnos_ausentes.setText(String.valueOf(programada.getNalumnos_ausentes()));
+            this.nalu = nalu;
+            nalumnos_totales.setText(String.valueOf(nalu - Integer.parseInt(nalumnos_ausentes.getText())));
         }
-
-        alumnos_desp.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    List<Object> cursos = alumnos_desp.getSelectedItems();
-                    // int totalAlumnos = obtenerTotalAlumnosParaGrupoCurso((String) e.getItem());
-                    for (Object curso : cursos) {
-                        Curso c = (Curso) curso;
-                        nalu += (c.getNumAlumnos());
-                        //.forEach(nalu += 
-                        
-                    }
-        
-                    nalumnos_totales.setText(String.valueOf("17"));
-                }
-            }
-        });
 
         ButtonGroup group = new ButtonGroup();
         group.add(cursos_boton);
@@ -901,7 +999,8 @@ public class Solicitudes extends JPanel {
             id = solicitud.getId_solicitud();
             Profesor solicitante = profesorSQL.buscar(Login.user.getId());
 
-            Solicitud solicitud = new Solicitud(id, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista, n_ausentes,
+            Solicitud solicitud = new Solicitud(id, solicitante, titulo, tipo, fini, ffin, hini, hfin, prevista,
+                    n_ausentes,
                     transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
                     null, transportes, participantes, responsables, cursos, grupos);
 
@@ -974,6 +1073,7 @@ public class Solicitudes extends JPanel {
         LocalDate ffin = selectFecha2.getSelectedDate();
         LocalTime hini = selectHora1.getSelectedTime();
         LocalTime hfin = selectHora2.getSelectedTime();
+        int n_ausentes = nalumnos_ausentes.getText().isEmpty() ? 0 : Integer.parseInt(nalumnos_ausentes.getText());
         boolean transporte_req = transporte_desp.getSelectedItems().isEmpty() ? false : true;
         String transporte_com = observaciones_trans.getText().isEmpty() ? null : observaciones_trans.getText();
         boolean alojam_req = alojamiento_si.isSelected();
@@ -1019,7 +1119,7 @@ public class Solicitudes extends JPanel {
             Profesor solicitante = profesorSQL.buscar(Login.user.getId());
 
             Programadas newprogramada = new Programadas(id, programada.getSolicitada(), solicitante, titulo, tipo, fini,
-                    ffin, hini, hfin, prevista,
+                    ffin, hini, hfin, prevista, n_ausentes,
                     transporte_req, transporte_com, alojam_req, alojam_com, comentarios, EstadoActividad.Solicitada,
                     programada.getEstado_comentario(), empresa_transporte, precio_transporte, transportes,
                     participantes, responsables, cursos, grupos);
