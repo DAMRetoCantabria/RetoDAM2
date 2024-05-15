@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/Estilo.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reta Cantabria</title>
+</head>
+<body>
+    <header id="cabecera">
+        <img src="img/icono2.png" alt="Logo">
+        <section class="textos-header">
+            <hr class="linea">
+            <nav id="indice">
+                <a href="index.html"><b>INICIO</b></a>
+                <a href="Actividades.html"><b>ACTIVIDADES</b></a>
+                <a href="Contacto.html"><b>CONTACTO</b></a>
+            </nav>
+            <hr class="linea">
+        </section>
+    </header>
+    <main>
+        <div id="Contacta">
+            <!--formulario de contacto-->
+            <div id="contacto">
+                <form action="#" method="post"><!--# para que no envie los datos a ninguna parte-->
+                             
+                        <p><label for="Usuario"><b>Correo</b></label><br><br>
+                        <input type="text" name="usuario" id="Usuario" required></p>
+ 
+                        <p><label for="Motivo de contacto" id="motivo de contacto"><b>Motivo de contacto</b></label><br><br>
+                        <select>
+                            <option value="sl">Seleccione un motivo</option>
+                            <option value="pr">Reclamación</option>
+                            <option value="in">Informacion</option>
+                            <option value="cl">Colaboracion</option>
+                            <option value="ot">Otro</option>
+                        </select></p>                            
+                       
+                        <p><label for="comentarios"><b>Comentarios</b></label><br><br>
+                            <textarea name="comentarios"></textarea></p><br>
+   
+                        <p>
+                           <input type="reset" name="borrar" id="reset">
+                        </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>RetaCantabria &copy; <a href="/HTML/index.html">Volver al Inicio.</a></p>
+    </footer>
+</body>
+</html>

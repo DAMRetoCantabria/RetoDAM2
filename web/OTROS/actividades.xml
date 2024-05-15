@@ -1,0 +1,82 @@
+<actividades>
+  <imagen id="actividad1">
+    <titulo>Salida a Barcelona</titulo>
+    <texto>Viaje a Barcelona con los alumnos de la ESO</texto>
+    <responsables>Prof. X, Prof. Y</responsables>
+    <horario>9:00 - 18:00</horario>
+    <descripcion>Este es un viaje educativo a Barcelona.sadfh sadjfhslkjfh fsjhf sakjfhsa fjkh jhasd fjsadh fñh daljfh ajfhas fjhsadfjh asjh jakshdf sjfh sadkjf hsakj hsakjhsfksah f</descripcion>
+    <clases>1º ESO, 2º ESO</clases>
+    <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+    <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+    <imgSrc>img/Movilidad_sostenible_2023.jpg</imgSrc>
+    <imgSrc>img/Olimpiada_biologia.jpg</imgSrc>
+    <imgSrc>img/Ruta_Kayak.jpg</imgSrc>
+    <videoSrc>img/Video_Montaje.mp4</videoSrc>
+  </imagen>
+    <imagen id="actividad2">
+        <titulo>Salida a Madrid</titulo>
+        <texto>Viaje a Madrid con los alumnos de la ESO</texto>
+        <responsables>Prof. X, Prof. Y</responsables>
+        <horario>9:00 - 18:00</horario>
+        <descripcion>Este es un viaje educativo a Madrid.</descripcion>
+        <clases>1º ESO, 2º ESO</clases>
+        <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+        <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+    </imagen>
+    <imagen id="actividad3">
+        <titulo>Salida a Valencia</titulo>
+        <texto>Viaje a Valencia con los alumnos de la ESO</texto>
+        <responsables>Prof. X, Prof. Y</responsables>
+        <horario>9:00 - 18:00</horario>
+        <descripcion>Este es un viaje educativo a Valencia.</descripcion>
+        <clases>1º ESO, 2º ESO</clases>
+        <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+        <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+        <imgSrc>img/Movilidad_sostenible_2023.jpg</imgSrc>
+        <imgSrc>img/Olimpiada_biologia.jpg</imgSrc>
+        <imgSrc>img/Ruta_Kayak.jpg</imgSrc>
+        <videoSrc>img/Video_Montaje.mp4</videoSrc>
+    </imagen>
+    <imagen id="actividad4">
+        <titulo>Salida a Sevilla</titulo>
+        <texto>Viaje a Sevilla con los alumnos de la ESO</texto>
+        <responsables>Prof. X, Prof. Y</responsables>
+        <horario>9:00 - 18:00</horario>
+        <descripcion>Este es un viaje educativo a Sevilla.</descripcion>
+        <clases>1º ESO, 2º ESO</clases>
+        <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+        <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+        <imgSrc>img/Movilidad_sostenible_2023.jpg</imgSrc>
+        <imgSrc>img/Olimpiada_biologia.jpg</imgSrc>
+        <imgSrc>img/Ruta_Kayak.jpg</imgSrc>
+        <videoSrc>img/Video_Montaje.mp4</videoSrc>
+    </imagen>
+    <imagen id="actividad5">
+        <titulo>Salida a Bilbao</titulo>
+        <texto>Viaje a Bilbao con los alumnos de la ESO</texto>
+        <responsables>Prof. X, Prof. Y</responsables>
+        <horario>9:00 - 18:00</horario>
+        <descripcion>Este es un viaje educativo a Bilbao.</descripcion>
+        <clases>1º ESO, 2º ESO</clases>
+        <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+        <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+        <imgSrc>img/Movilidad_sostenible_2023.jpg</imgSrc>
+        <imgSrc>img/Olimpiada_biologia.jpg</imgSrc>
+        <imgSrc>img/Ruta_Kayak.jpg</imgSrc>
+        <videoSrc>img/Video_Montaje.mp4</videoSrc>
+    </imagen>
+    <imagen id="actividad6">
+        <titulo>Salida a Zaragoza</titulo>
+        <texto>Viaje a Zaragoza con los alumnos de la ESO</texto>
+        <responsables>Prof. X, Prof. Y</responsables>
+        <horario>9:00 - 18:00</horario>
+        <descripcion>Este es un viaje educativo a Zaragoza.</descripcion>
+        <clases>1º ESO, 2º ESO</clases>
+        <imgSrc>img/Catedral_barcelona.jpg</imgSrc>
+        <imgSrc>img/Cyberseguridad.jpg</imgSrc>
+        <imgSrc>img/Movilidad_sostenible_2023.jpg</imgSrc>
+        <imgSrc>img/Olimpiada_biologia.jpg</imgSrc>
+        <imgSrc>img/Ruta_Kayak.jpg</imgSrc>
+        <videoSrc>img/Video_Montaje.mp4</videoSrc>
+    </imagen>
+</actividades>

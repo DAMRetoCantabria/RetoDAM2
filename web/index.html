@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Reta Cantabria</title>
+        <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/Estilo.css" />
+    </head>
+    <body>
+        <header id="cabecera">
+            <!--cabecera-->
+            <img src="img/icono2.png" alt="Logo">
+            <section class="textos-header">
+                <hr class="linea">
+                <nav id="indice">
+                    <a href="index.html"><b>INICIO</b></a>
+                    <a href="Actividades.html"><b>ACTIVIDADES</b></a>
+                    <a href="Contacto.html"><b>CONTACTO</b></a>
+                </nav>
+                <hr class="linea">
+            </section>
+        </header>
+        <main>
+            <section id="Cuerpo">
+                <!--Apartado de imagenes-->
+                <div class="slider">
+                    <ul>
+                        <li>
+                            <img class="foto_modal" id="actividad1" src="img/Catedral_barcelona.jpg" alt="" onclick="showModal('actividad1')">
+                            <div class="texto-slider">
+                                <h1> Salida a Barcelona </h1>
+                                <p> Viaje a Barcelona con los alumnos de la ESO</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="foto_modal" id="actividad2" src="img/Cyberseguridad.jpg" alt="" onclick="showModal('actividad2')">
+                            <div class="texto-slider">
+                                <h1> Conferencia de Ciberseguridad </h1>
+                                <p> Conferencia sobre ciberseguridad y jornadas de estudio y pentesting.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="foto_modal" id="actividad3" src="img/Movilidad_sostenible_2023.jpg" alt="" onclick="showModal('actividad3')">
+                            <div class="texto-slider">
+                                <h1> 1º Premio en el Campeonato Nacional de Movilidad Sostenible </h1>
+                                <p> Los alumnos de Mecánica obtuvieron el galardón por su trabajo en el Mini Electrico </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="foto_modal" id="actividad4" src="img/Olimpiada_biologia.jpg" alt="" onclick="showModal('actividad4')">
+                            <div class="texto-slider">
+                                <h1> XVII Olimpiadas de Biología </h1>
+                                <p> Nuestros representantes obtuvieron unos resultados mágnificos. </p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="foto_modal" id="actividad5" src="img/Ruta_Kayak.jpg" alt="" onclick="showModal('actividad5')">
+                            <div class="texto-slider">
+                                <h1> Descenso del Sella </h1>
+                                <p> Realizamos una bajada al Sella en Canoa con los alumnos de 1º de Bachillerato</p>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="foto_modal" id="actividad6" src="img/Yo_Soy_FP.jpg" alt="" onclick="showModal('actividad6')">
+                            <div class="texto-slider">
+                                <h1> Simposio Yo Soy FP </h1>
+                                <p> Jornadas de orientación para los jóvenes de Formación profesional</p>
+                            </div>
+                        </li>
+                        <div id="popup" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div class="modal-grid">
+                                    <div class="modal-info">
+                                        <div class="modal-info-centro">
+                                            <h1 id="modalTitle"></h1>
+                                            <p id="modalText"></p>
+                                            <p id="modalResponsables"></p>
+                                            <p id="modalHorario"></p>
+                                            <p id="modalDescripcion"></p>
+                                            <p id="modalClases"></p>
+                                        </div>
+                                    </div>
+                                    <div id="modalMedia"\>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <section class="piePagina">
+                <h5>RetaCantabria &copy;</h5>
+                <button class="chat-button"><a  href="Contacto.html">Contacta</a></button>
+            </section>
+        </footer>
+        <script src="OTROS/script.js"></script>
+    </body>
+</html>

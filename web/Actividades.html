@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Estilo.css" />
+    <title>Reta Cantabria</title>
+</head>
+
+<body>
+    <header id="cabecera">
+        <img src="img/icono2.png" alt="Logo">
+        <section class="textos-header">
+            <hr class="linea">
+            <nav id="indice">
+                <a href="index.html"><b>INICIO</b></a>
+                <a href="Actividades.html"><b>ACTIVIDADES</b></a>
+                <a href="Contacto.html"><b>CONTACTO</b></a>
+            </nav>
+            <hr class="linea">
+    </header>  
+    <main>
+        <section id="galeria">
+            <div id="galeria-fotos">
+                <div>
+                    <img class="foto_modal" id="actividad1" src="img/Catedral_barcelona.jpg" alt="Imagen 1" onclick="showModal('actividad1')">
+                    <label>Viaje a Barcelona</label>
+                </div>
+                <div>
+                    <img class="foto_modal" id="actividad2" src="img/Cyberseguridad.jpg" alt="Imagen 2">
+                    <label>Conferencia de Ciberseguridad</label>
+                </div>      
+                <div>
+                    <img class="foto_modal" id="actividad3" src="img/Movilidad_sostenible_2023.jpg" alt="Imagen 3">
+                    <label>Premio Nacional de Movilidad Sostenible</label>
+                </div>      
+                <div>
+                    <img class="foto_modal" id="actividad4" src="img/Olimpiada_biologia.jpg" alt="Imagen 4">
+                    <label>Olimpiada de Biologia</label>
+                </div>      
+                <div>
+                    <img class="foto_modal" id="actividad5" src="img/Ruta_Kayak.jpg" alt="Imagen 5">
+                    <label>Descenso del Sella</label>
+                </div>      
+                <div>
+                    <img class="foto_modal" id="actividad6" src="img/Yo_Soy_FP.jpg" alt="Imagen 6">
+                    <label>Simposium #YoSoyFP</label>
+                </div>
+            </div>
+        </section>
+        <div id="popup" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-grid">
+                    <div class="modal-info">
+                        <div class="modal-info-centro">
+                            <h1 id="modalTitle"></h1>
+                            <p id="modalText"></p>
+                            <p id="modalResponsables"></p>
+                            <p id="modalHorario"></p>
+                            <p id="modalDescripcion"></p>
+                            <p id="modalClases"></p>
+                        </div>
+                    </div>
+                    <div id="modalMedia"\>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <section class="piePagina">
+            <h5>RetaCantabria &copy; <a href="/HTML/index.html">Volver al Inicio.</a></h5>
+            <button class="chat-button"><a  href="Contacto.html">Contacta</a></button>
+        </section>
+    </footer>
+    <script src="OTROS/script.js"></script>
+</body>
+</html>
