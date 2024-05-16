@@ -1008,8 +1008,7 @@ public class Solicitudes extends JPanel {
             id = solicitudSQL.guardar(solicitud);
         }
 
-        if (cambio == true && estado == 2) {
-
+        if (cambio == true) {
             for (Profesor responsable : responsables) {
                 int id_responsable = responsable.getId();
                 solicitudSQL.guardarResponsable(id, id_responsable);
