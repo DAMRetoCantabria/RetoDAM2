@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function showModal(imgId) {
-
         // Create a new XMLHttpRequest object
         var xhttp = new XMLHttpRequest();
 

@@ -146,7 +146,7 @@ public class Login extends JPanel {
                             "SELECT * FROM profesores WHERE correo = ? AND password IS NULL AND ACTIVO = 1");
                     statement.setString(1, usuario);
                     resultSet = statement.executeQuery();
-
+                    
                     if (resultSet.next()) {
                         Profesor profesor = new Profesor(resultSet.getInt("id"), resultSet.getString("dni"),
                                 resultSet.getString("nombre"), resultSet.getString("apellidos"),

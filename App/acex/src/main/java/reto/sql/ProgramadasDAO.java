@@ -74,7 +74,7 @@ public class ProgramadasDAO implements RepositorioSolicitud<Programadas> {
             stmt.setString(16, programada.getEstado_comentario());
             stmt.setString(17, programada.getEmpresa_transporte());
             stmt.setDouble(18, programada.getPrecio_transporte());
-
+            
             int salida = stmt.executeUpdate();
             if (salida != 1) {
                 throw new Exception(" No se ha insertado/modificado un solo registro");
