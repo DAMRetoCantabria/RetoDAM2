@@ -8,6 +8,7 @@
     font-family: "Permanent Marker", cursive; /* 'open sans'*/;
   }
 
+
 /* ///////////////// HEADER ///////////////// */
 
   #cabecera {
@@ -15,9 +16,9 @@
     justify-content: space-between;
     background: linear-gradient(rgba(71, 30, 30, 0.5), rgba(37, 71, 30, 0.5));
     align-items: center;
-    height: 18vh; 
+    height: 18vh; /*15*/
     width: 100%;
-    position: relative; 
+    position: relative; /*revisar, con los dos de abajo*/
     resize: both;
     overflow: auto;
     background-repeat: space;
@@ -127,6 +128,7 @@
     height: 80vh;
     overflow: hidden;
     padding-top: 60px;
+    
     transform: translate(0,5px);
   }
 
