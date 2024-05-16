@@ -25,7 +25,9 @@
   * Cursos/Grupos y numero de alumnos
   * Funcionalidad
 
-[5. Software utilizado](#software)  
+[5. Ideas](#ideas)
+
+[6. Software utilizado](#software)  
 
 
 ---
@@ -108,23 +110,23 @@
 
   ### Imagen de E/R. <a name="diagramaE/R"></a>
 
-![Diagrama Entidad Relación](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/EsquemaER.png)
+![Diagrama Entidad Relación](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/EsquemaER.png)
 
   ### Diagrama relacional <a name="diagramaR"></a>
 
-![Diagrama Relacional](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/EsquemaRelacional.png)
+![Diagrama Relacional](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/EsquemaRelacional.png)
 
   ### Archivo de importacion SQL 
 
-[Script importacion BD](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base%20de%20Datos/DBReto.sql)
+[Script importacion BD](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Base%20de%20Datos/DBReto.sql)
 
-[Script importacion BD con datos de prueba](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Base%20de%20Datos/DBTest.sql)
+[Script importacion BD con datos de prueba](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Base%20de%20Datos/DBTest.sql)
 
 # 2. SERVIDORES <a name="servidores"></a>
 
   ## SERVIDOR BASE DE DATOS MARIADB  
 
-  [Ova ](https://drive.google.com/file/d/1iz1FwSp_O5ZKs6jGE6jYrHDsfCGmY5B_/view?usp=sharing)
+  [Ova](https://drive.google.com/file/d/17NO7nlaUEmpzO4ColvCjlL00GNjMMRCw/view?usp=sharing)
 
   La elección del servidor de base de datos se realizó en base a varias consideraciones:  
 
@@ -140,7 +142,9 @@
   En el contexto de nuestra aplicación, hemos configurado el servidor MariaDB en una máquina virtual Alpine Linux mediante un contenedor Docker. El servidor está escuchando en el puerto **3306**. Para acceder a él, utilizamos las credenciales de **desarrollo** y contraseña **retacantabria24**. Este enfoque nos permite gestionar eficientemente la base de datos y garantizar la seguridad de nuestras operaciones.
 
   
-  ## SERVIDOR WEB NGINX
+  ## SERVIDOR WEB NGINX  
+
+  [Ova](https://drive.google.com/file/d/1xt7l9hGyoEinUVdi1srIZNa4HShyZ_EL/view?usp=sharing)
 
   Contenedor Docker con Nginx para el Servidor Web:
 
@@ -191,19 +195,19 @@ En resumen, la elección de estos contenedores proporciona una infraestructura f
 
   Tanto la pagina principal
 
-  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Inicio.png)
+  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Inicio.png)
 
   como la galeria
 
-  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Galeria.png)
+  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Galeria.png)
 
   muestran imagenes que representan diferentes actividades realizadas por el instituto. Clicando cualquiera de las imagenes obtendremos mas información sobre las mismas ademas de una galeria con imagenes y videos. 
 
-  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/actividades.png)
+  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/actividades.png)
 
   Además hemos añadido un formulario de contacto para que posibles promotores, o empresas interesadas puedan contactar con el instituto para ofrecer sus servicios.
 
-  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Contacto.png)
+  ![](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Contacto.png)
 
 ### Estilo
 
@@ -595,15 +599,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   ### Diagrama de clases
 
-![Diagrama de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/UML.png)
+![Diagrama de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/UML.png)
 
   ### Casos de uso  
 
-![Diagrama de casos de uso](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/CasosUso.png)
+![Diagrama de casos de uso](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/CasosUso.png)
+
+ACTORES.  
+  1. SuperUsuario: Encargadode la configuración y mantenimiento del sistema.  
+  2. Administrador: Responsable de cargar datos, mantener la aplicación, aprobar/denegar una solicitud, ver su estado e incluso tiene acceso si desea crear una solicitud.  
+  3. EquipoDirectivo: Tienen la capacidad de aprobar o denegar solicitudes.  
+  4. Profesor: Pueden crear solicitudes y consultar su estado.
+
+CASOS DE USO. 
+1. Configuración.  
+• Actor: SuperUsuario.  
+• Descripción: Podrá realizar tareas de configuración de la aplicación. 
+2. Mantenimiento.  
+• Actor: SuperUsuario, Administrador.  
+• Descripción: Permite gestionar y dar mantenimiento a la aplicación. 
+3. Cargar Datos. 
+• Actor: Administrador.  
+• Descripción: Permite la carga de datos del profesorado y otros elementos del centro educativo. 
+4. Aprobar/Denegar solicitud:  
+• Actor: Administrador, EquipoDirectivo.  
+• Descripción: Permite revisar y tomar decisiones sobre las solicitudes de actividades. 
+5. Estado/Modificar solicitud.  
+• Actor: Administrador, EquipoDirectivo, Profesor.  
+• Descripción: Permite ver el estado o modificar una solicitud. 
+6. Crear Solicitud.  
+• Actor: Administrador, Profesor.  
+• Descripción: Permite crear una solicitud.
+
 
   ### Javadoc
 
-  [Documentacion Javadoc](https://raw.githack.com/DAMRetoCantabria/RetoDAM2/Documentaci%C3%B3n/App/acex/target/site/apidocs/index.html)
+  [Documentacion Javadoc](https://raw.githack.com/DAMRetoCantabria/RetoDAM2/main/App/acex/target/site/apidocs/index.html)
 
   ### Cursos/Grupos y numero de alumnos
 
@@ -621,7 +652,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   3.  Proceso de Actualización: Al presionar el botón “Actualizar”, la aplicación intentará cargar los datos del archivo CSV. Si no se ha seleccionado ningún archivo o el archivo es inválido, se mostrará un mensaje de error alertando al usuario.
   4.  Resultados de la Carga: Si el archivo es válido y los datos se cargan correctamente, la aplicación informará al usuario sobre el número de datos actualizados y el número de nuevos datos que se han añadido a la base de datos.  
 
-  ![Carga de Datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/carga.png)  
+  ![Carga de Datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/carga.png)  
 
   **Gestion de datos**
   1. Edición de Datos: Para editar la información de un registro existente, simplemente seleccione la fila correspondiente y realice uno de los siguientes pasos:  
@@ -630,31 +661,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
   2. Añadir Nuevos Datos: Para introducir nuevos datos en el sistema, haga clic en el botón “Crear”. Se abrirá la misma ventana de edición, donde podrá ingresar la información requerida para el nuevo registro.
   3. Eliminar Datos: Si necesita eliminar un registro, seleccione la fila deseada y haga clic en el botón “Borrar”. Se le pedirá que confirme la acción antes de que se elimine definitivamente la información.  
 
-  ![Gestion de datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/visualizacion.png)  
+  ![Gestion de datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/visualizacion.png)  
 
   **Modificar datos**
   1. Introducción de Datos: Al acceder a esta ventana, encontrará campos para ingresar o editar la información.
   2. Añadir Nuevos Datos: La aplicación utiliza la misma ventana para introducir nuevos datos y para editarlos, facilitando el uso.
   3. Guardar Cambios: Una vez que haya ingresado o modificado la información, haga clic en el botón “Aceptar” para guardar los cambios.  
 
-  ![Modificar datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Modificacion.png)  
+  ![Modificar datos](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Modificacion.png)  
 
   **Crear solicitudes**  
 
-  ![Creacion de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Creacion.png)  
+  ![Creacion de clases](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Creacion.png)  
 
   **Gestion de solicitudes**  
 
-  ![Gestion de solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/gestion.png)  
+  ![Gestion de solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/gestion.png)  
 
   **Revisión de actividades y solicitudes**
   1. Visualización de Actividades y solicitudes: La tabla muestra los detalles importantes de cada actividad, como el ID, el título, el tipo, las fechas, y si se requiere transporte o alojamiento.
   2. Edición de Actividades y solicitudes: Para modificar la información de una actividad, realice un doble clic sobre la fila correspondiente. Esto abrirá la ventana de edición, donde podrá actualizar los datos necesarios.  
 
-  ![Revision  de actividades y solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/Documentaci%C3%B3n/Markdown/Revision.png)  
+  ![Revision  de actividades y solicitudes](https://github.com/DAMRetoCantabria/RetoDAM2/blob/main/Markdown/Revision.png)  
 
+# 5.- IDEAS
 
-# 5.- SOFTWARE UTILIZADO <a name="software"></a>
+  Hay numerosas funcionalidades y caracteristicas que no hemos podido implementar por falta de tiempo, a continuación enumeraré algunas:
+
+    - Recordar correo electrónico del último usuario registrado.
+    - Generación aleatoria de contraseñas enviadas automáticamente al correo del usuario en el primer login.
+    - Cerrar ventanas con ESC
+    - Permitir subir imagenes y videos desde la aplicación.
+    - Boton "Publicar" en las actividades realizadas para poder publicar automáticamente en la web recogiendo la información en un XML. La página está adaptada ya para mostrar informacion de un XML.
+    - (BUG) A la hora de llevar la cuenta de los alumnos, si deselecciono grupos/cursos desde los nombres con la X del desplegable multiseleccion no me resta el numero de alumnos.
+    - Personalización de fotos de perfil de los usuarios.
+    - Enlaces a la web, y capacidad de retirar publicaciones de la web desde la app.
+    - Notificaciones de escritorio cuando se realiza algun cambio en una solicitud de la que eres responsable o solicitante.
+    - Capacidad de votar las actividades realizadas a posteriori.
+
+# 6.- SOFTWARE UTILIZADO <a name="software"></a>
 
 
 | Software | Uso |
